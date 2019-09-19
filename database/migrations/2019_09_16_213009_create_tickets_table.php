@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('serial_number', 255);
             $table->integer('concert_id');
             $table->integer('ticket_category_id');

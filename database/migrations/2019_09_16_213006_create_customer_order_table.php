@@ -19,6 +19,7 @@ class CreateCustomerOrderTable extends Migration
     {
         Schema::create('customer_order', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->integer('customer_id');
             $table->timestamp('order_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->string('delivery_address', 255)->nullable();

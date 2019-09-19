@@ -19,6 +19,7 @@ class CreateArtistsTable extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('artist_name', 255);
             $table->integer('genre_id');
             $table->nullableTimestamps();

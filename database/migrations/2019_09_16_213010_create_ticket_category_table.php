@@ -19,6 +19,7 @@ class CreateTicketCategoryTable extends Migration
     {
         Schema::create('ticket_category', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('description', 255);
             $table->decimal('price', 10, 2);
             $table->timestamp('start_date')->nullable();

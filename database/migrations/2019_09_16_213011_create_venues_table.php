@@ -19,6 +19,7 @@ class CreateVenuesTable extends Migration
     {
         Schema::create('venues', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('venue_name', 255);
             $table->string('location', 255);
             $table->string('type', 255);

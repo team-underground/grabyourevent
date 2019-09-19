@@ -19,6 +19,7 @@ class CreateConcertGroupTable extends Migration
     {
         Schema::create('concert_group', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('name', 255);
             $table->nullableTimestamps();
         });

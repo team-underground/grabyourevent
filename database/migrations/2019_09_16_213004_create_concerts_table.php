@@ -19,6 +19,7 @@ class CreateConcertsTable extends Migration
     {
         Schema::create('concerts', function (Blueprint $table) {
             $table->integer('id');
+            $table->string('uuid');
             $table->string('concert_name', 255);
             $table->integer('artist_id');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
