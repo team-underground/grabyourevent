@@ -1,5 +1,5 @@
 <template>
-	<layout>
+	<div>
 		<div class="bg-white shadow-base px-4 relative z-20 md:z-20">
 			<div class="container md:flex items-center justify-between mx-auto">
 				<div class="flex justify-between md:flex-none items-center">
@@ -216,7 +216,7 @@
 			</div>
 		</div>
 		<div class="h-3 bg-gray-400"></div>
-	</layout>
+	</div>
 </template>
 
 <script>
@@ -233,6 +233,7 @@ import LoadingButton from "@/Shared/tuis/LoadingButton";
 
 export default {
 	components: {
+		Layout,
 		Card,
 		Heading,
 		Dropdown,
