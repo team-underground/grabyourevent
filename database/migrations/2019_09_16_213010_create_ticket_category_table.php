@@ -18,14 +18,13 @@ class CreateTicketCategoryTable extends Migration
     public function up()
     {
         Schema::create('ticket_category', function (Blueprint $table) {
-            $table->integer('id');
+            $table->bigIncrements('id');
             $table->string('uuid');
+            $table->unsignedInteger('user_id');
             $table->string('description', 255);
             $table->decimal('price', 10, 2);
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
-            $table->string('area', 255)->nullable();
-            $table->integer('concert_id');
             $table->nullableTimestamps();
         });
     }

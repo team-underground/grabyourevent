@@ -17,11 +17,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->text('confirmation_code');
-            $table->timestamp('confirmation_time')->nullable();
+            $table->integer('phone')->unique();
+            $table->string('profile_photo');
+            $table->text('short_description');
+            $table->string('website_url');
             $table->rememberToken();
             $table->nullableTimestamps();
         });

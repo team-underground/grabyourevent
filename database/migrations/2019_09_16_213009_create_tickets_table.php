@@ -18,12 +18,11 @@ class CreateTicketsTable extends Migration
     public function up()
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->integer('id');
+            $table->bigIncrements('id');
             $table->string('uuid');
-            $table->string('serial_number', 255);
-            $table->integer('concert_id');
-            $table->integer('ticket_category_id');
-            $table->string('seat', 255)->nullable();
+            $table->string('serial_number', 100);
+            $table->unsignedInteger('event_id');
+            $table->unsignedInteger('ticket_category_id');
             $table->timestamp('purchase_date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->nullableTimestamps();
         });
