@@ -21,3 +21,11 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 });
+
+//events
+Route::get('/events', 'EventsController@index');
+Route::post('/events/create', 'EventsController@store');
+Route::get('/events/{event}/edit', 'EventsController@edit')->name('events.edit');
+
+//tickets
+Route::post('/events/{event}/buy', 'EventTicketController@store')->name('tickets.buy');

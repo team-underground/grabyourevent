@@ -21,13 +21,14 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('event_name', 255);
+            $table->string('event_slug', 255)->nullable();
             $table->integer('category_id');
             $table->string('artist_name', 100)->nullable();
             $table->text('event_description');
             $table->text('optional_description');
             $table->json('what_is_included');
             $table->timestamp('event_start_date');
-            $table->enum('event_type', ['public', 'private'])->default('public');
+            $table->timestamp('event_end_date')->nullable();
             $table->boolean('is_featured')->default(0);
             $table->text('event_location');
             $table->unsignedInteger('event_pincode');

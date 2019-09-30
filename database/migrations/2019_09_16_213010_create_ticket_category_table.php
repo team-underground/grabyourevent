@@ -17,14 +17,17 @@ class CreateTicketCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket_category', function (Blueprint $table) {
+        Schema::create('ticket_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
-            $table->unsignedInteger('user_id');
-            $table->string('description', 255);
-            $table->decimal('price', 10, 2);
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
+            $table->unsignedInteger('event_id');
+            $table->string('ticket_category_name', 255);
+            $table->string('ticket_category_description', 255)->nullable();
+            $table->decimal('ticket_category_price', 10, 2);
+            $table->unsignedInteger('no_of_tickets')->nullable();
+            $table->unsignedInteger('no_of_tickets_left')->nullable();
+            $table->timestamp('ticket_category_start_date')->nullable();
+            $table->timestamp('ticket_category_end_date')->nullable();
             $table->nullableTimestamps();
         });
     }
@@ -36,6 +39,6 @@ class CreateTicketCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket_category');
+        Schema::dropIfExists('ticket_categories');
     }
 }
