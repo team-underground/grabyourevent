@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,13 +19,13 @@ class CreateTicketsTable extends Migration
     public function up()
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->integer('id');
+            $table->bigIncrements('id');
             $table->string('uuid');
-            $table->string('serial_number', 255);
-            $table->integer('concert_id');
-            $table->integer('ticket_category_id');
-            $table->string('seat', 255)->nullable();
-            $table->timestamp('purchase_date')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('serial_number', 100);
+            $table->unsignedInteger('event_id');
+            $table->unsignedInteger('ticket_category_id');
+            $table->unsignedInteger('no_of_entries')->nullable();
+            $table->timestamp('purchase_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->nullableTimestamps();
         });
     }

@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-resource-links": "^1.0",
         "sumatoglobal/inertia-tailwind-preset": "dev-master"
     },
     "require-dev": {

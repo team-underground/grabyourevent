@@ -18,15 +18,10 @@ class CreateCustomerOrderTable extends Migration
     public function up()
     {
         Schema::create('customer_order', function (Blueprint $table) {
-            $table->integer('id');
+            $table->bigIncrements('id');
             $table->string('uuid');
-            $table->integer('customer_id');
+            $table->unsignedInteger('user_id');
             $table->timestamp('order_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('delivery_address', 255)->nullable();
-            $table->string('delivery_email_address', 255);
-            $table->timestamp('preferred_delivery_time')->nullable();
-            $table->timestamp('time_paid')->nullable();
-            $table->timestamp('time_sent')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->decimal('discount', 10, 2);
             $table->decimal('final_price', 10, 2);

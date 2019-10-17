@@ -51,3 +51,10 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });
+//events
+Route::get('/events', 'EventsController@index');
+Route::post('/events/create', 'EventsController@store');
+Route::get('/events/{event}/edit', 'EventsController@edit')->name('events.edit');
+
+//tickets
+Route::post('/events/{event}/buy', 'EventTicketController@store')->name('tickets.buy');

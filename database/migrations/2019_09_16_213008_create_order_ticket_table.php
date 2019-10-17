@@ -18,9 +18,9 @@ class CreateOrderTicketTable extends Migration
     public function up()
     {
         Schema::create('order_ticket', function (Blueprint $table) {
-            $table->integer('id');
-            $table->integer('customer_order_id');
-            $table->integer('ticket_id');
+            $table->bigIncrements('id');
+            $table->unsignedInteger('customer_order_id');
+            $table->unsignedInteger('ticket_id');
             $table->nullableTimestamps();
         });
     }
