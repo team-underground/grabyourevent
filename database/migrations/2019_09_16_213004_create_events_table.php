@@ -34,6 +34,8 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('event_pincode');
             $table->string('event_district', 50);
             $table->string('event_state', 50);
+            $table->string('latitude');
+            $table->string('longitude');
             $table->nullableTimestamps();
         });
     }

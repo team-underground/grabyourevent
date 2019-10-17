@@ -26,6 +26,7 @@ Route::get('/contact', function () {
 Route::get('/events', 'EventsController@index');
 Route::post('/events/create', 'EventsController@store');
 Route::get('/events/{event}/edit', 'EventsController@edit')->name('events.edit');
+Route::get('/events/{event_slug}', 'EventsController@show')->name('events.show');
 
 //tickets
 Route::post('/events/{event}/buy', 'EventTicketController@store')->name('tickets.buy');

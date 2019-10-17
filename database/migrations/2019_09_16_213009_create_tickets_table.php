@@ -24,7 +24,6 @@ class CreateTicketsTable extends Migration
             $table->string('serial_number', 100);
             $table->unsignedInteger('event_id');
             $table->unsignedInteger('ticket_category_id');
-            $table->unsignedInteger('no_of_entries')->nullable();
             $table->timestamp('purchase_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->nullableTimestamps();
         });

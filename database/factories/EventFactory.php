@@ -5,10 +5,12 @@
 use App\Category;
 use App\Event;
 use Carbon\Carbon;
-use Faker\Generator as Faker;
+use Faker\Generator as FakerGenerator;
 use Illuminate\Support\Arr;
 
-$factory->define(Event::class, function (Faker $faker) {
+$factory->define(Event::class, function (FakerGenerator $faker) {
+    $faker->addProvider(new Faker\Provider\en_US\Address($faker));
+
     return [
         "uuid" => $faker->uuid,
         "event_name" => $event_name = $faker->sentence(rand(5, 10)),
@@ -16,7 +18,7 @@ $factory->define(Event::class, function (Faker $faker) {
         "artist_name" => $faker->name,
         "event_description" => $faker->sentence(30),
         "optional_description" => $faker->sentence(20),
-        "what_is_included" => implode(" ", $faker->words(rand(3, 7))),
+        "what_is_included" => explode(" ", $faker->sentence(rand(5, 10))),
         "event_start_date" => $event_start_date = Carbon::now()->addDays(rand(10, 20)),
         "event_end_date" => Arr::random([null, Carbon::now()->addDays(rand(25, 30))]),
         "is_featured" => rand(0, 1),
@@ -25,5 +27,7 @@ $factory->define(Event::class, function (Faker $faker) {
         "event_district" => Arr::random(['DBR', "JRH", "GHY", "TEZ"]),
         "event_state" => Arr::random(['Assam', "Meghalaya", "Manipur"]),
         "event_slug" => Str::slug($event_name . "-" . date('M-d-Y', $event_start_date->timestamp)),
+        "latitude" => $faker->latitude(26, 27),
+        "longitude" => $faker->longitude(91, 92)
     ];
 });

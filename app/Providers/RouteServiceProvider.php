@@ -27,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::model('event', Event::class);
+
+        // Route::bind('event', function ($value) {
+        //     return App\User::where('uuid', $value)->first() ?? abort(404);
+        // });
     }
 
     /**

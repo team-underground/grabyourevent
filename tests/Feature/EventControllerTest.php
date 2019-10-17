@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Category;
+use App\Event;
+use App\Http\Resources\EventResource;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
@@ -22,6 +24,8 @@ class EventControllerTest extends TestCase
     /** @test */
     public function test_user_could_create_a_event()
     {
+        $this->faker->addProvider(new \Faker\Provider\en_US\Address($this->faker));
+        // dd($this->faker->latitude(26, 27));
         $response = $this->post('/events/create', [
             "event_name" => $sentence = $this->faker->sentence(5),
             "category_id" => factory(Category::class)->create()->id,
@@ -35,6 +39,9 @@ class EventControllerTest extends TestCase
             "event_pincode" => random_int(700001, 799999),
             "event_district" => Arr::random(['DBR', "JRH", "GHY", "TEZ"]),
             "event_state" => Arr::random(['Assam', "Meghalaya", "Manipur"]),
+            "latitude" => $this->faker->latitude(26, 27),
+            "longitude" => $this->faker->longitude(91, 92),
+            // "is_featured" => 1,
             "ticket_categories" => [
                 [
                     "ticket_category_name" => "General Admission",
@@ -62,16 +69,33 @@ class EventControllerTest extends TestCase
                 "event_district",
                 "event_state",
                 "uuid",
-                "id",
-                "event_ticket_price"
+                "event_ticket_price",
+                "latitude",
+                "longitude"
             ]);
 
         $response = $this->get('/events');
-        $response->assertJson([
-            [
-                'event_name' => $sentence
-            ]
-        ]);
         // dd($response->decodeResponseJson());
+        $response->assertJsonStructure([
+            'FEATURED EVENTS',
+            'UPCOMING EVENTS' => [
+                [
+                    "event_name",
+                    "artist_name",
+                    "event_description",
+                    "optional_description",
+                    "what_is_included",
+                    "event_location",
+                    "event_pincode",
+                    "event_district",
+                    "event_state",
+                    "uuid",
+                    "event_ticket_price",
+                    "latitude",
+                    "longitude"
+                ]
+            ],
+            'BROWSE EVENTS BY GENRE'
+        ]);
     }
 }

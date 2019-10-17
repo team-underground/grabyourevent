@@ -18,12 +18,13 @@ class EventTicketController extends Controller
         foreach ($request->ordered_tickets as $orderedTicket) {
             $ticketCategory = TicketCategory::where('id', $orderedTicket['ticket_category_id'])->first();
 
-            $ticketCategory->tickets()->create([
-                'uuid' => Str::uuid(),
-                'serial_number' => Str::upper(Str::random(8)),
-                'event_id' => $event->id,
-                'no_of_entries' => $orderedTicket['no_of_tickets']
-            ]);
+            for ($i = 0; $i < $orderedTicket['no_of_tickets']; $i++) {
+                $ticketCategory->tickets()->create([
+                    'uuid' => Str::uuid(),
+                    'serial_number' => Str::upper(Str::random(8)),
+                    'event_id' => $event->id
+                ]);
+            }
 
             $ticketCategory->no_of_tickets_left = $ticketCategory->no_of_tickets - $orderedTicket['no_of_tickets'];
             $ticketCategory->save();
@@ -31,9 +32,10 @@ class EventTicketController extends Controller
 
         $tickets = TicketCategory::with('tickets')->whereIn('id', $request->ticket_catgories)->get()->pluck('tickets')->flatten();
 
+        // TODO need to send the tickets to ticket buyer in mail with ticket attachments
+
         return response($tickets->transform(function ($ticket) {
             return new TicketResource($ticket);
         }));
-        // return response(new TicketResource($ticket->refresh()));
     }
 }

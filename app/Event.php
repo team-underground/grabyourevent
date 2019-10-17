@@ -81,6 +81,16 @@ class Event extends BaseModel
         return $this->ticketcategories->sum('ticket_category_price') === 0;
     }
 
+    public function scopeisFeatured($query)
+    {
+        return $query->where('is_featured', 1)->get();
+    }
+
+    public function scopeisUpcoming($query)
+    {
+        return $query->where('event_start_date', '>', Carbon::now())->get();
+    }
+
     public function generateTicketCategories($ticketCategories)
     {
         foreach ($ticketCategories as $key => $category) {

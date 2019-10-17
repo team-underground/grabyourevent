@@ -19,6 +19,8 @@ class TicketSaleControllerTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withHeader('Accept', 'application/json');
 
+        $this->faker->addProvider(new \Faker\Provider\en_US\Address($this->faker));
+
         $response = $this->post('/events/create', [
             "event_name" => $sentence = $this->faker->sentence(5),
             "category_id" => factory(Category::class)->create()->id,
@@ -32,6 +34,8 @@ class TicketSaleControllerTest extends TestCase
             "event_pincode" => random_int(700001, 799999),
             "event_district" => Arr::random(['DBR', "JRH", "GHY", "TEZ"]),
             "event_state" => Arr::random(['Assam', "Meghalaya", "Manipur"]),
+            "latitude" => $this->faker->latitude(26, 27),
+            "longitude" => $this->faker->longitude(91, 92),
             "ticket_categories" => [
                 [
                     "ticket_category_name" => "General Admission",
@@ -64,6 +68,7 @@ class TicketSaleControllerTest extends TestCase
             ]
         ]);
 
-        dd($response->decodeResponseJson());
+        $response->assertJsonCount(13)
+            ->assertSuccessful();
     }
 }
