@@ -1,10 +1,6 @@
 <template>
 	<div>
-		<label
-			v-if="label"
-			class="form-label block mb-1 font-semibold text-gray-700"
-			:for="id"
-		>{{ label }}</label>
+		<label v-if="label" class="form-label block mb-1 font-normal text-gray-800" :for="id">{{ label }}</label>
 		<label
 			class="items-center mb-2 clearfix relative"
 			:class="[{'inline-flex mr-4': stacked == false, 'flex w-full': stacked == true}, classes, { 'border-blue-500': modelValue == option.value && customActive == true && customActiveClass == 'text-blue-500','border-red-500': modelValue == option.value && customActive == true && customActiveClass == 'text-red-500', 'border-teal-500': modelValue == option.value && customActive == true && customActiveClass == 'text-teal-500'}]"

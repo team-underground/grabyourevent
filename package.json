@@ -22,5 +22,9 @@
         "tailwindcss": "^1.1.2",
         "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "vue-social-sharing": "^2.4.6",
+        "vue-unicons": "^1.4.1"
     }
 }
