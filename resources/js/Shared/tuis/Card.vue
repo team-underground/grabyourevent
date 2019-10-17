@@ -1,5 +1,9 @@
 <template>
-	<div class="shadow w-full rounded-lg bg-white overflow-hidden w-full">
+	<component
+		:is="tag"
+		class="shadow w-full rounded-lg bg-white overflow-hidden w-full block"
+		:href="to"
+	>
 		<div
 			class="card-header border-0 flex items-center justify-between px-8 py-3 bg-gray-100"
 			v-if="withHeader"
@@ -19,7 +23,7 @@
 		<div class="px-8 py-3 bg-gray-100" v-if="withFooter">
 			<slot name="footer"></slot>
 		</div>
-	</div>
+	</component>
 </template>
 
 <script>
@@ -38,6 +42,13 @@ export default {
 		isPadding: {
 			type: Boolean,
 			default: true
+		},
+		to: {
+			type: String
+		},
+		tag: {
+			type: String,
+			default: "div"
 		}
 	},
 

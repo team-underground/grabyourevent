@@ -1,17 +1,15 @@
 <template>
-	<div>
-		<div class="switch-button-control">
-			<div
-				class="switch-button"
-				:class="{ enabled: isEnabled }"
-				@click="toggle"
-				:style="{'--color': color}"
-			>
-				<div class="button"></div>
-			</div>
-			<div class="switch-button-label">
-				<slot></slot>
-			</div>
+	<div class="switch-button-control">
+		<div
+			class="switch-button"
+			:class="{ enabled: isEnabled }"
+			@click="toggle"
+			:style="{'--color': color}"
+		>
+			<div class="button"></div>
+		</div>
+		<div class="switch-button-label">
+			<slot></slot>
 		</div>
 	</div>
 </template>
@@ -42,7 +40,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .switch-button-control {
 	display: flex;
 	flex-direction: row;

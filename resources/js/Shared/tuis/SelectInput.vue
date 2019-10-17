@@ -1,10 +1,6 @@
 <template>
 	<div>
-		<label
-			v-if="label"
-			class="form-label block mb-1 font-semibold text-gray-700"
-			:for="id"
-		>{{ label }}</label>
+		<label v-if="label" class="form-label block mb-1 font-normal text-gray-800" :for="id">{{ label }}</label>
 		<div class="relative">
 			<select
 				:id="id"
