@@ -59,3 +59,32 @@ Route::get('/events/{event_slug}', 'EventsController@show')->name('events.show')
 
 //tickets
 Route::post('/events/{event}/buy', 'EventTicketController@store')->name('tickets.buy');
+Route::get('/tickets', function () {
+    return Inertia::render('Tickets');
+});
+
+
+Route::get('/single', function () {
+    return Inertia::render('Single');
+});
+
+Route::get('/settings', function () {
+    return Inertia::render('Settings');
+});
+
+Route::get('/notifications', function () {
+    return Inertia::render('Notifications');
+});
+
+Route::get('/faq', function () {
+    return Inertia::render('Faq');
+});
+
+
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+});
+
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+});
