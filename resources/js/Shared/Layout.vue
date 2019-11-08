@@ -37,7 +37,7 @@
 						class="px-4 mr-3 py-5 inline-block font-medium active text-orange-600 hover:text-orange-600"
 					>Home</a>
 					<a
-						href="#"
+						href="/events"
 						class="px-4 mr-3 py-5 inline-block font-medium text-gray-500 hover:text-orange-600"
 					>Events</a>
 					<a

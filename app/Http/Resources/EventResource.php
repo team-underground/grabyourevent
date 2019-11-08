@@ -9,29 +9,34 @@ class EventResource extends JsonResource
 
     public function toArray($request): array
     {
-        // dd($this->event_date_formatted);
         return [
             // "id" => $this->id,
             "uuid" => $this->uuid,
             "event_name" => $this->event_name,
             "event_slug" => $this->event_slug,
+            "event_image_path" => $this->event_image_path,
+            "event_image_orientation" => $this->event_image_orientation,
             "artist_name" => $this->artist_name,
             "event_description" => $this->event_description,
             "optional_description" => $this->optional_description,
             "what_is_included" => $this->what_is_included,
             "event_location" => $this->event_location,
             "event_pincode" => $this->event_pincode,
-            "event_district" => $this->event_district,
+            "event_city" => $this->event_city,
             "event_state" => $this->event_state,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'category_name' => $this->category->category_name,
+            'event_category' => $this->event_category,
             'event_ticket_price' => $this->isFree()
                 ? 'Free'
                 : $this->ticket_price_formatted,
+            'event_date' => date('d', $this->event_starting_date->timestamp),
+            'event_month' => date('M', $this->event_starting_date->timestamp),
             'event_formatted_date' => $this->dateFormat(),
+            'event_formatted_time' => $this->timeFormat(),
+            'organiser' => $this->organiser,
             'links' => [
-                'edit' => route('events.edit', $this),
+                'edit' => route('admin.events.edit', $this),
                 'show' => route('events.show', $this->event_slug)
             ],
         ];

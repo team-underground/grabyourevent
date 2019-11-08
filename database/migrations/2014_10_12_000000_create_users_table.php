@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\UserType;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
@@ -17,17 +19,21 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('name');
-            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('phone')->unique();
-            $table->string('profile_photo');
-            $table->text('short_description');
-            $table->string('website_url');
+            $table->tinyInteger('type')->unsigned()->default(UserType::Organiser);
+            $table->string('phone', 15)->nullable();
+            $table->string('profile_photo')->nullable();
+            $table->text('short_description')->nullable();
+            $table->string('website_url')->nullable();
             $table->rememberToken();
             $table->nullableTimestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => AdminUserSeeder::class
+        ]);
     }
 
     /**

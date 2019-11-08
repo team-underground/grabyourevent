@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\EventStatusType;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,22 +21,33 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
+            $table->integer('organiser_id');
+            $table->string('event_id');
             $table->string('event_name', 255);
             $table->string('event_slug', 255)->nullable();
-            $table->integer('category_id');
+            $table->string('event_image', 255);
+            $table->integer('event_category');
             $table->string('artist_name', 100)->nullable();
             $table->text('event_description');
             $table->text('optional_description');
-            $table->json('what_is_included');
-            $table->timestamp('event_start_date');
-            $table->timestamp('event_end_date')->nullable();
+            $table->json('what_is_included')->nullable();
+            $table->timestamp('event_starting_date');
+            $table->timestamp('event_ending_date')->nullable();
             $table->boolean('is_featured')->default(0);
+
             $table->text('event_location');
+            $table->string('event_city', 50);
             $table->unsignedInteger('event_pincode');
-            $table->string('event_district', 50);
             $table->string('event_state', 50);
             $table->string('latitude');
             $table->string('longitude');
+
+            $table->string('seo_title')->nullable();
+            $table->text('meta_description');
+            $table->text('meta_keywords');
+
+            $table->tinyInteger('event_status')->unsigned()->default(EventStatusType::Moderation);
+            $table->timestamp('event_published_at')->nullable();
             $table->nullableTimestamps();
         });
     }

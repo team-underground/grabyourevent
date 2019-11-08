@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Category;
+use App\User;
 use App\Event;
-use App\Http\Resources\EventResource;
+use App\Category;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
+use App\Http\Resources\EventResource;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -28,8 +29,10 @@ class EventControllerTest extends TestCase
         // dd($this->faker->latitude(26, 27));
         $response = $this->post('/events/create', [
             "event_name" => $sentence = $this->faker->sentence(5),
+            "organiser_id" => factory(User::class)->create()->id,
             "category_id" => factory(Category::class)->create()->id,
             "artist_name" => $this->faker->name,
+            "event_image" => $this->faker->image(),
             "event_description" => $this->faker->sentence(30),
             "optional_description" => $this->faker->sentence(20),
             "what_is_included" => ['asjkdhff', 'sadfjksadf', 'asdfsad'],
@@ -57,45 +60,51 @@ class EventControllerTest extends TestCase
         ]);
         // dd($response->decodeResponseJson());
 
-        $response->assertSuccessful()
-            ->assertJsonStructure([
-                "event_name",
-                "artist_name",
-                "event_description",
-                "optional_description",
-                "what_is_included",
-                "event_location",
-                "event_pincode",
-                "event_district",
-                "event_state",
-                "uuid",
-                "event_ticket_price",
-                "latitude",
-                "longitude"
-            ]);
-
+        // $response->assertSuccessful()
+        //     ->assertPropCount('events', 1);
+        // ->assertJsonStructure([
+        //     "event_name",
+        //     "artist_name",
+        //     "event_description",
+        //     "optional_description",
+        //     "what_is_included",
+        //     "event_location",
+        //     "event_pincode",
+        //     "event_district",
+        //     "event_state",
+        //     "uuid",
+        //     "event_ticket_price",
+        //     "latitude",
+        //     "longitude"
+        // ]);
+        // dd($response->decodeResponseJson());
         $response = $this->get('/events');
         // dd($response->decodeResponseJson());
-        $response->assertJsonStructure([
-            'FEATURED EVENTS',
-            'UPCOMING EVENTS' => [
-                [
-                    "event_name",
-                    "artist_name",
-                    "event_description",
-                    "optional_description",
-                    "what_is_included",
-                    "event_location",
-                    "event_pincode",
-                    "event_district",
-                    "event_state",
-                    "uuid",
-                    "event_ticket_price",
-                    "latitude",
-                    "longitude"
-                ]
-            ],
-            'BROWSE EVENTS BY GENRE'
-        ]);
+        $response
+            ->assertPropCount('events.data', 1)
+            ->assertPropValue('events.data', function ($event) use ($sentence) {
+                $this->assertEquals($sentence, $event[0]['event_name']);
+            });
+        //     ->assertJsonStructure([
+        //     'FEATURED EVENTS',
+        //     'UPCOMING EVENTS' => [
+        //         [
+        //             "event_name",
+        //             "artist_name",
+        //             "event_description",
+        //             "optional_description",
+        //             "what_is_included",
+        //             "event_location",
+        //             "event_pincode",
+        //             "event_district",
+        //             "event_state",
+        //             "uuid",
+        //             "event_ticket_price",
+        //             "latitude",
+        //             "longitude"
+        //         ]
+        //     ],
+        //     'BROWSE EVENTS BY GENRE'
+        // ]);
     }
 }

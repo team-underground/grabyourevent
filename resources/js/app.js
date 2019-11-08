@@ -61,10 +61,11 @@ Unicon.add([
     uniMoneyStack,
     uniBoltAlt
 ]);
+
+Vue.mixin({ methods: { route: window.route } });
 Vue.use(Unicon);
 Vue.use(SocialSharing);
 Vue.use(InertiaApp);
-
 const app = document.getElementById("app");
 
 new Vue({

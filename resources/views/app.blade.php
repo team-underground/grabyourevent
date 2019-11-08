@@ -11,6 +11,9 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     <script src="{{ mix('/js/app.js') }}" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDnZlozbQxmvDtPh072TphyYqkUYk4V8&libraries=places" async="" defer=""></script> 
+    
+    @routes
 </head>
 
 <body class="bg-gray-100 antialiased font-sans text-gray-600">

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Event;
+use App\Category;
+use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateEventRequest;
 use App\Http\Resources\EventResource;
+use App\Http\Requests\CreateEventRequest;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * @group Events
@@ -22,46 +24,15 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $featured = Event::isFeatured();
-        $upcoming = Event::isUpcoming();
+        $events = Event::orderBy('event_starting_date')->published()->closed(false);
 
-        return response([
-            'FEATURED EVENTS' => $featured->transform(function ($event) {
-                return new EventResource($event);
-            }),
-            'UPCOMING EVENTS' => $upcoming->transform(function ($event) {
-                return new EventResource($event);
-            }),
-            'BROWSE EVENTS BY GENRE' => Category::select('category_name')->withCount('events')->get()
+        return Inertia::render('Front/Events/Index', [
+            'events' => $events->paginate()
+                ->transform(function ($event) {
+                    return new EventResource($event);
+                }),
+            'events_count' => Event::count()
         ]);
-    }
-
-    /**
-     * Store A new Event
-     * Api for storing a new event, only for admin and organiser
-     * 
-     */
-    public function store(CreateEventRequest $request)
-    {
-        // dd($request->all());
-        $event = Event::create(array_merge($request->except('ticket_categories'), [
-            "uuid" => Str::uuid(),
-            "event_slug" => Str::slug($request->event_name . "-" . date('M-d-Y', $request->event_start_date->timestamp))
-        ]));
-        // dd($event);
-
-        $event->generateTicketCategories($request->ticket_categories);
-        // return response($event);
-        return response(new EventResource($event));
-    }
-
-    /**
-     * Edit Event
-     * Api for editing event, only for admin and organiser
-     */
-    public function edit($event)
-    {
-        return response(new EventResource($event));
     }
 
     /**
@@ -70,8 +41,10 @@ class EventsController extends Controller
      */
     public function show($eventSlug)
     {
-        $event = Event::where('event_slug', $eventSlug)->firstOrFail();
+        $event = Event::with('organiser')->where('event_slug', $eventSlug)->firstOrFail();
 
-        return response(new EventResource($event));
+        return Inertia::render('Front/Events/Show', [
+            'event' => new EventResource($event)
+        ]);
     }
 }

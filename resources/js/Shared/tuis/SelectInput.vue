@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<label v-if="label" class="form-label block mb-1 font-normal text-gray-800" :for="id">{{ label }}</label>
+		<label
+			v-if="label"
+			class="form-label block mb-1 font-semibold text-gray-700"
+			:for="id"
+		>{{ label }}</label>
 		<div class="relative">
 			<select
 				:id="id"
@@ -12,7 +16,12 @@
 				:class="{ 'border-red-400': errors.length }"
 			>
 				<slot></slot>
-				<option v-for="(option, name) in options" :value="option.value" :key="name">{{ option.label }}</option>
+				<template v-if="selectValue == 'value'">
+					<option v-for="option in options" :value="option.value">{{ option.label }}</option>
+				</template>
+				<template v-else>
+					<option v-for="(option, key) in options" :value="key">{{ option }}</option>
+				</template>
 			</select>
 			<div v-if="errors.length" class="text-red-600 mt-1 text-sm">{{ errors[0] }}</div>
 			<svg
@@ -53,7 +62,8 @@ export default {
 		errors: {
 			type: Array,
 			default: () => []
-		}
+		},
+		selectValue: String
 	},
 
 	data() {
