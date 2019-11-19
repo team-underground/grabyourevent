@@ -9,11 +9,10 @@ use App\TicketCategory;
 use App\Enums\CategoryType;
 use Illuminate\Support\Str;
 use JamesMills\Uuid\HasUuidTrait;
-use Spatie\ResourceLinks\HasLinks;
 
 class Event extends BaseModel
 {
-    use HasUuidTrait, HasLinks;
+    use HasUuidTrait;
 
     protected $casts = [
         "what_is_included" => "array",
@@ -89,13 +88,15 @@ class Event extends BaseModel
     {
         $date1 = $this->event_starting_date->timestamp;
         $date2 = $this->event_ending_date instanceof Carbon ? $this->event_ending_date->timestamp : null;
+        // ddd($date1, $date2);
         //if date2 is null, return the format with first datetime
         if ($date2 == null) {
             return date('M d', $date1);
         }
-
+        // ddd('here');
         $year1 = date('Y', $date1);
         $year2 = date('Y', $date2);
+        // ddd($year1, $year2);
         // if two years are not same
         if ($year1 != $year2) {
             return date('M d,Y', $date1) . " - " . date('d M,Y', $date2);
@@ -103,6 +104,8 @@ class Event extends BaseModel
 
         $month1 = date('m', $date1);
         $month2 = date('m', $date2);
+        // ddd($month1, $month2);
+
         // if two months are not same
         if ($month1 != $month2) {
             return date('M d', $date1) . " - " . date('d M', $date2);
@@ -110,10 +113,12 @@ class Event extends BaseModel
 
         $firstDate = date('Y-m-d', $date1);
         $secondDate = date('Y-m-d', $date2);
+        // ddd($firstDate, $secondDate);
         //if first date and second date are equal
         if ($firstDate === $secondDate) {
             return date('M d', $date1);
         }
+        return date('M d', $date1) . " - " . date('d M', $date2);
     }
 
     public function timeFormat()
@@ -141,7 +146,7 @@ class Event extends BaseModel
 
     public function isFree()
     {
-        return $this->ticketcategories->sum('ticket_category_price') === 0;
+        return $this->ticketcategories->sum('ticket_category_price') == 0;
     }
 
     public function scopeFeatured($query, $value)

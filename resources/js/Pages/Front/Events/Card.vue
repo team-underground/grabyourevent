@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="flex bg-white text-sm justify-between items-center">
-				<heading>{{ event.event_ticket_price }}</heading>
+				<heading v-html="event.event_ticket_price"></heading>
 			</div>
 		</div>
 	</card>

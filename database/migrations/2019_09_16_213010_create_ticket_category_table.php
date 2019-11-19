@@ -22,7 +22,7 @@ class CreateTicketCategoryTable extends Migration
             $table->string('uuid');
             $table->unsignedInteger('event_id');
             $table->string('ticket_category_name', 255);
-            $table->string('ticket_category_description', 255)->nullable();
+            $table->text('ticket_category_description')->nullable();
             $table->decimal('ticket_category_price', 10, 2);
             $table->unsignedInteger('no_of_tickets')->nullable();
             $table->unsignedInteger('no_of_tickets_left')->nullable();

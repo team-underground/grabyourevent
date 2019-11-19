@@ -2,6 +2,7 @@
 	<layout>
 		<div class="px-4 lg:px-6 py-5 md:py-10 bg-gray-100">
 			<div class="max-w-6xl mx-auto">
+				{{event}}
 				<card :is-padding="false" class="mb-10">
 					<div class="md:flex md:flex-wrap relative">
 						<div class="md:w-1/2 bg-gray-100">
@@ -63,9 +64,14 @@
 								<template v-else>
 									<div class="w-1/2">
 										<heading size="small-caps" class="font-serif">Starts From</heading>
-										<span class="text-xl text-gray-800">Rs 500/-</span>
+										<span class="text-xl text-gray-800" v-html="event.event_ticket_price"></span>
 									</div>
-									<loading-button class="mt-auto w-1/2" variant="warning">Buy Tickets</loading-button>
+									<loading-button
+										class="mt-auto w-1/2"
+										variant="warning"
+										:to="`/events/${event.uuid}/buy`"
+										tag="a"
+									>Buy Tickets</loading-button>
 								</template>
 								<!-- <loading-button
 									class="mt-auto w-1/2"

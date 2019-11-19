@@ -12,7 +12,11 @@
 
     <script src="{{ mix('/js/app.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDnZlozbQxmvDtPh072TphyYqkUYk4V8&libraries=places" async="" defer=""></script> 
-    
+    <!-- built files will be auto injected -->
+    @if(\Request::is('checkout'))
+    <script  async defer src="https://checkout.razorpay.com/v1/checkout.js"
+    ></script>
+    @endif
     @routes
 </head>
 
