@@ -12,11 +12,23 @@ use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
 {
+    public function index()
+    {
+        $events = Event::with('organiser')
+            ->filter(request()->only('search'))
+            ->role()
+            ->orderByDesc('created_at')
+            ->simplePaginate(10);
+
+        $filters = request()->all('search');
+
+        return Inertia::render('Admin/Events/Index', compact('events', 'filters'));
+    }
     public function create()
     {
         $categories = CategoryType::toSelectArray();
 
-        return Inertia::render('Create', [
+        return Inertia::render('Admin/Events/Create', [
             'categories' => $categories
         ]);
     }

@@ -3,7 +3,7 @@
 		<div class="bg-white shadow-base px-4 relative z-20 md:z-20 lg:py-2">
 			<div class="container md:flex items-center justify-between mx-auto">
 				<div class="flex justify-between md:flex-none items-center">
-					<a
+					<!-- <inertia-link
 						href="/"
 						class="flex items-center font-bold tracking-tight font-serif text-gray-800 text-2xl"
 					>
@@ -13,7 +13,13 @@
 							<span class="block leading-none uppercase text-xs text-justify">Event</span>
 							<span class="block leading-none text-xs text-justify">.com</span>
 						</div>
-					</a>
+					</inertia-link> -->
+					<inertia-link
+						href="/"
+						class="flex items-center font-bold tracking-tight font-serif text-gray-800 text-2xl"
+					>
+						<img src="/gye_logo.svg" alt="" srcset="" width="140">
+					</inertia-link>
 
 					<div
 						class="inline-block inline-flex items-center justify-center w-8 h-8 rounded-full mr-2 cursor-pointer md:hidden"
@@ -32,31 +38,40 @@
 				</div>
 
 				<div class="hidden md:block">
-					<a
+					<!-- v-if="$page.auth.user" -->
+					<inertia-link
+						href="/dashboard"
+						:class="isUrl('dashboard') ? 'text-orange-600 active' : 'text-gray-500'"
+						class="mr-6 py-6 inline-block font-medium hover:text-orange-600"
+					>Dashboard</inertia-link>
+					<inertia-link
 						href="/"
-						class="px-4 mr-3 py-5 inline-block font-medium active text-orange-600 hover:text-orange-600"
-					>Home</a>
-					<a
+						:class="isUrl('') ? 'text-orange-600 active' : 'text-gray-500'"
+						class="px-4 mr-3 py-5 inline-block font-medium hover:text-orange-600"
+					>Home</inertia-link>
+					<inertia-link
 						href="/events"
-						class="px-4 mr-3 py-5 inline-block font-medium text-gray-500 hover:text-orange-600"
-					>Events</a>
-					<a
+						:class="isUrl('events') ? 'text-orange-600 active' : 'text-gray-500'"
+						class="px-4 mr-3 py-5 inline-block font-medium hover:text-orange-600"
+					>Events</inertia-link>
+					<!-- <a
 						href="/tickets"
 						class="px-4 mr-3 py-5 inline-block font-medium text-gray-500 hover:text-orange-600"
-					>Tickets</a>
+					>Tickets</a> -->
 
-					<a
-						href="#"
-						class="px-4 py-5 inline-block font-medium text-gray-500 hover:text-orange-600"
-					>Trending</a>
+					<inertia-link
+						href="/this-month"
+						:class="isUrl('this-month') ? 'text-orange-600 active' : 'text-gray-500'"
+						class="px-4 py-5 inline-block font-medium hover:text-orange-600"
+					>This Month</inertia-link>
 				</div>
 
 				<div class="hidden md:block">
-					<a
+					<inertia-link
 						href="/login"
 						class="px-4 py-5 mr-3 inline-block font-medium text-gray-500 hover:text-orange-600"
-					>Log in</a>
-					<loading-button tag="a" to="/register" variant="warning" size="small">Sign up</loading-button>
+					>Log in</inertia-link>
+					<loading-button tag="inertia-link" to="/register" variant="warning" size="small">Sign up</loading-button>
 					<!-- <dropdown>
 						<template #trigger>
 							<div
@@ -309,7 +324,8 @@ export default {
 			}
 
 			return urls.filter(url =>
-				location.pathname.substr(1).startsWith(url)
+				// location.pathname.substr(1).startsWith(url)
+				location.pathname.substr(1) == url
 			).length;
 		}
 	}

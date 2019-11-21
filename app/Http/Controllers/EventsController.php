@@ -24,15 +24,27 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events = Event::orderBy('event_starting_date')->published()->closed(false);
+        if (request()->path() === 'events') {
+            $query = Event::published()->closed(false);
 
-        return Inertia::render('Front/Events/Index', [
-            'events' => $events->paginate()
-                ->transform(function ($event) {
-                    return new EventResource($event);
-                }),
-            'events_count' => Event::count()
-        ]);
+            return Inertia::render('Front/Events/Index', [
+                'events' => $query->orderBy('event_starting_date')->paginate()
+                    ->transform(function ($event) {
+                        return new EventResource($event);
+                    }),
+                'events_count' => $query->count()
+            ]);
+        } else {
+            $query = Event::whereRaw('MONTH(event_starting_date) = ?', [date('m')])->published()->closed(false);
+
+            return Inertia::render('Front/Events/ThisMonth', [
+                'events' => $query->orderBy('event_starting_date')->paginate()
+                    ->transform(function ($event) {
+                        return new EventResource($event);
+                    }),
+                'events_count' => $query->count()
+            ]);
+        }
     }
 
     /**

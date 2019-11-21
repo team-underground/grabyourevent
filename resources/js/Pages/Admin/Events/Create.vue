@@ -2,8 +2,8 @@
 	<layout>
 		<div class="bg-white px-4 pt-6 pb-4 relative shadow-sm z-20">
 			<div class="max-w-6xl mx-auto">
-				<link-to to="/admin/jobs" class="mb-2">
-					<icon name="chevron-left" class="-ml-2"></icon>Back to Jobs
+				<link-to to="/admin/events" class="mb-2">
+					<icon name="chevron-left" class="-ml-2"></icon>Back to Events
 				</link-to>
 				<div class="flex w-full justify-between items-center">
 					<div class="flex-1">
@@ -140,7 +140,7 @@
 							<div class="md:w-1/3 px-4">
 								<heading size="large" class="mb-1">Event Location</heading>
 								<heading class="mb-4">Details about where your event will be hosted.</heading>
-								<alert>Search your event venue from the map</alert>
+								<alert>Search your event venue from the map to get started</alert>
 							</div>
 							<div class="md:w-2/3 px-4">
 								<card>

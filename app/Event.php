@@ -8,11 +8,14 @@ use Carbon\Carbon;
 use App\TicketCategory;
 use App\Enums\CategoryType;
 use Illuminate\Support\Str;
+use App\Enums\EventStatusType;
 use JamesMills\Uuid\HasUuidTrait;
+use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 
-class Event extends BaseModel
+class Event extends BaseModel implements ViewableContract
 {
-    use HasUuidTrait;
+    use HasUuidTrait, Viewable;
 
     protected $casts = [
         "what_is_included" => "array",
@@ -21,7 +24,9 @@ class Event extends BaseModel
         "meta_keywords" => "array"
     ];
 
-    protected $appends = ['event_image_path', 'event_image_orientation'];
+    protected $dates = ['event_published_at'];
+
+    protected $appends = ['event_image_path', 'event_image_orientation', 'event_published_at_formatted'];
 
     public function getRouteKeyName()
     {
@@ -79,9 +84,19 @@ class Event extends BaseModel
             return "portrait";
     }
 
+    public function getEventStatusAttribute($value)
+    {
+        return EventStatusType::getDescription($value);
+    }
+
     public function getTicketPriceFormattedAttribute()
     {
-        return money_format('&#8377; %!n', $this->lowest_price) . ' - ' . money_format('&#8377; %!n', $this->maximum_price);
+        $lowestFormat = money_format('&#8377; %!n', $this->lowest_price);
+        $maxFormat =  money_format('&#8377; %!n', $this->maximum_price);
+        if ($lowestFormat == $maxFormat) {
+            return $lowestFormat;
+        }
+        return $lowestFormat . ' - ' . $maxFormat;
     }
 
     public function dateFormat()
@@ -129,7 +144,7 @@ class Event extends BaseModel
     public function getLowestPriceAttribute()
     {
         $prices = $this->ticketcategories->filter(function ($item) {
-            return !is_null($item->ticket_category_price);
+            return !is_null($item->ticket_category_price) && $item->ticket_category_price != 0;
         });
 
         return $prices->min('ticket_category_price');
@@ -199,6 +214,56 @@ class Event extends BaseModel
                 "uuid" => Str::uuid(),
             ]));
         }
+    }
+
+    public function getEventPublishedAtFormattedAttribute()
+    {
+        // return (Carbon::today() == $value) ? Carbon::parse($value)->diffForHumans() : Carbon::parse($value)->format('j M, Y');
+        // Carbon::parse($value)->toFormattedDateString(); // Dec 19, 2015
+        if ($this->event_published_at == null) {
+            return 'Not published yet';
+        }
+        $created = new Carbon($this->event_published_at);
+        $now = Carbon::now();
+
+        if ($created->diff($now)->days <= 1) {
+            $difference = $created->diffForHumans(null, null, true);
+        } else if ($created->diff($now)->days < 2) {
+            $difference = 'Yesterday';
+        } else if (in_array($created->diff($now)->days, [3, 4, 5, 6, 7])) {
+            $difference = $created->diff($now)->days . ' days ago';
+        } else {
+            $difference = $created->toFormattedDateString();
+        }
+
+        return $difference;
+    }
+
+    public function scopeRole($query)
+    {
+        if (auth()->check()) {
+            if (auth()->user()->type == 'Organiser') {
+                $query->where('user_id', auth()->user()->id);
+            }
+        }
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('event_name', 'like', '%' . $search . '%')
+                    ->orWhere('event_location', 'like', '%' . $search . '%');
+            });
+        })->when($filters['category'] ?? null, function ($query, $jobCategory) {
+            $jobCategoryArray = explode(',', $jobCategory);
+
+            $jobCategoryIds = collect($jobCategoryArray)->map(function ($j) {
+                return CategoryType::getValue(Str::studly($j, ' '));
+            });
+
+            $query->whereIn('event_category', $jobCategoryIds);
+        });
     }
 
     public function ticketcategories()

@@ -1,58 +1,6 @@
 <template>
-	<layout>
-		<div class="bg-orange-100 md:flex items-center">
-			<div class="md:w-2/4">
-				<div class="w-full bg-orange-100 relative" style="height: 420px">
-					<img
-						:src="featured[1].event_image_path"
-						alt="image"
-						class="object-fit object-cover w-full h-full"
-					/>
-
-					<div class="triangle-orange absolute right-0 bottom-0"></div>
-				</div>
-			</div>
-
-			<div class="md:w-2/4 relative">
-				<div
-					class="absolute right-0 bottom-0 w-32 h-32 inline-flex items-center justify-center text-center text-white py-2 text- bg-orange-300 rounded-full mr-16 rounded-bl-none"
-				>
-					<!-- <div class="h-10 w-10 bg-orange-200 block mx-auto rounded-full absolute left-0 top-0"></div>
-					<div class="h-10 w-10 bg-orange-200 block mx-auto rounded-full absolute right-0 top-0"></div>-->
-					<div>
-						<heading size="display" class="tracking-wide">21</heading>
-						<heading class="text-orange-600">Feb, 2019</heading>
-					</div>
-				</div>
-				<div class="px-8 md:px-16 py-8">
-					<span
-						class="bg-orange-200 text-orange-600 rounded-full text-sm inline-block uppercase px-2 tracking-wide mb-3 font-semibold"
-					>Adventure</span>
-					<heading size="display" class="mb-4">Bacardi NH7 Weekender 2019, Meghalaya</heading>
-					<div class="flex mb-3">
-						<unicon
-							name="clock-nine"
-							class="text-gray-500 mr-3"
-							fill="currentColor"
-							width="24"
-							height="24"
-						></unicon>8:00 AM – 8:30 PM
-					</div>
-
-					<div class="flex mb-3">
-						<unicon
-							name="location-point"
-							class="text-gray-500 mr-3"
-							fill="currentColor"
-							width="24"
-							height="24"
-						></unicon>Tashigang - Rangjung Road
-					</div>
-
-					<link-to class="mt-4" to="/single">View details</link-to>
-				</div>
-			</div>
-		</div>
+	<layout> 
+		<event-advertise-card :event="advertised[0]" color="bg-orange-100"></event-advertise-card>
 
 		<!-- featured events -->
 		<div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
@@ -86,58 +34,7 @@
 			</div>
 		</div>
 
-		<div class="bg-blue-100 md:flex items-center">
-			<div class="md:w-2/4">
-				<div class="w-full bg-blue-100 relative" style="height: 420px">
-					<img
-						:src="featured[0].event_image_path"
-						alt="image"
-						class="object-fit object-contain w-full h-full"
-					/>
-					<div class="triangle-blue absolute right-0 bottom-0"></div>
-				</div>
-			</div>
-
-			<div class="md:w-2/4 relative">
-				<div
-					class="absolute right-0 bottom-0 w-32 h-32 inline-flex items-center justify-center text-center text-white py-2 text- bg-orange-300 rounded-full mr-16 rounded-bl-none"
-				>
-					<!-- <div class="h-10 w-10 bg-orange-200 block mx-auto rounded-full absolute left-0 top-0"></div>
-					<div class="h-10 w-10 bg-orange-200 block mx-auto rounded-full absolute right-0 top-0"></div>-->
-					<div>
-						<heading size="display" class="tracking-wide">21</heading>
-						<heading class="text-orange-600">Feb, 2019</heading>
-					</div>
-				</div>
-				<div class="px-8 md:px-16 py-8">
-					<span
-						class="bg-orange-200 text-orange-600 rounded-full text-sm inline-block uppercase px-2 tracking-wide mb-3 font-semibold"
-					>Adventure</span>
-					<heading size="display" class="mb-4">Bhutan Happiness Marathon 2020</heading>
-					<div class="flex mb-3">
-						<unicon
-							name="clock-nine"
-							class="text-gray-500 mr-3"
-							fill="currentColor"
-							width="24"
-							height="24"
-						></unicon>8:00 AM – 8:30 PM
-					</div>
-
-					<div class="flex mb-3">
-						<unicon
-							name="location-point"
-							class="text-gray-500 mr-3"
-							fill="currentColor"
-							width="24"
-							height="24"
-						></unicon>Tashigang - Rangjung Road
-					</div>
-
-					<link-to class="mt-4" to="/single">View details</link-to>
-				</div>
-			</div>
-		</div>
+		<event-advertise-card :event="advertised[1]"></event-advertise-card>
 
 		<div class="px-4 lg:px-6 py-16 bg-white">
 			<div class="container mx-auto">
@@ -291,6 +188,7 @@ import List from "@/Shared/tuis/List";
 import LoadingButton from "@/Shared/tuis/LoadingButton";
 import MediaObject from "@/Shared/tuis/MediaObject";
 import EventCard from "./Front/Events/Card";
+import EventAdvertiseCard from "./Front/Events/AdvertiseCard";
 
 export default {
 	components: {
@@ -301,13 +199,15 @@ export default {
 		List,
 		LoadingButton,
 		MediaObject,
-		EventCard
+		EventCard,
+		EventAdvertiseCard
 	},
 
 	props: {
 		categories: Array,
 		featured: Array,
-		upcoming: Array
+		upcoming: Array,
+		advertised: Array
 	},
 
 	data() {
@@ -315,22 +215,3 @@ export default {
 	}
 };
 </script>
- 
-
-<style>
-.triangle-orange {
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 0 75px 75px;
-	border-color: transparent transparent #fffaf0 transparent;
-}
-
-.triangle-blue {
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 0 75px 75px;
-	border-color: transparent transparent #ebf8ff transparent;
-}
-</style>

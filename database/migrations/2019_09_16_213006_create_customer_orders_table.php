@@ -20,11 +20,14 @@ class CreateCustomerOrdersTable extends Migration
         Schema::create('customer_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
+            $table->string('receipt_id', 100);
+            $table->string('razorpay_order_id', 100)->nullable();
+            $table->string('razorpay_payment_id', 100)->nullable();
             $table->unsignedInteger('user_id');
-            $table->timestamp('order_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->decimal('total_price', 10, 2);
-            $table->decimal('discount', 10, 2);
-            $table->decimal('final_price', 10, 2);
+            $table->timestamp('order_time')->nullable();
+            $table->decimal('total_price', 10, 2)->nullable();
+            $table->decimal('discount', 10, 2)->nullable();
+            $table->decimal('final_price', 10, 2)->nullable();
             $table->nullableTimestamps();
         });
     }

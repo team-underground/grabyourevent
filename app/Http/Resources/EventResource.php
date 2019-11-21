@@ -32,6 +32,7 @@ class EventResource extends JsonResource
                 : $this->ticket_price_formatted,
             'event_date' => date('d', $this->event_starting_date->timestamp),
             'event_month' => date('M', $this->event_starting_date->timestamp),
+            'event_year' => date('Y', $this->event_starting_date->timestamp),
             'event_formatted_date' => $this->dateFormat(),
             'event_formatted_time' => $this->timeFormat(),
             'organiser' => $this->organiser,
