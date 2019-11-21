@@ -3,8 +3,9 @@
 		<div class="bg-white shadow-base px-4 relative z-20 md:z-20 lg:py-2">
 			<div class="container md:flex items-center justify-between mx-auto">
 				<div class="flex justify-between md:flex-none items-center">
-					<inertia-link href="/">
-						<img src="/gye.svg" alt="gye" width="124" />
+					<inertia-link href="/" class="py-2 md:py-0">
+						<img src="/gye.svg" alt="gye" width="124" class="hidden md:block" />
+						<img src="/gye.svg" alt="gye" width="90" class="md:hidden" />
 					</inertia-link>
 
 					<div

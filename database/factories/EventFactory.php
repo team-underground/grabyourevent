@@ -25,7 +25,7 @@ $factory->define(Event::class, function (FakerGenerator $faker) {
         "organiser_id" => 2,
         "event_id" => 'GYE-' . rand(000000, 999999),
         "event_name" => $eventName = $faker->sentence(rand(5, 10)),
-        "event_image" => 'events/' . $faker->image($filepath, 400, 300, null, false),
+        "event_image" => 'events/' . $faker->image($filepath, 1200, 800, null, false),
         "event_category" => $faker->randomElement([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
         "artist_name" => $faker->name,
         "event_description" => $faker->sentence(30),

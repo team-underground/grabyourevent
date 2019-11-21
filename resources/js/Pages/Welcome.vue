@@ -1,5 +1,5 @@
 <template>
-	<layout> 
+	<layout>
 		<event-advertise-card :event="advertised[0]" color="bg-orange-100"></event-advertise-card>
 
 		<!-- featured events -->
@@ -36,14 +36,20 @@
 
 		<event-advertise-card :event="advertised[1]"></event-advertise-card>
 
-		<div class="px-4 lg:px-6 py-16 bg-white">
+		<div class="px-4 lg:px-6 py-8 md:py-20 bg-white">
 			<div class="container mx-auto">
 				<heading size="heading" class="mb-10 text-center">Event Categories</heading>
-				<div class="flex flex-wrap flex-1 -mx-4 mb-10">
-					<div class="w-1/3 md:w-1/6 px-4 mb-8" v-for="(category, idx) in categories" :key="idx">
-						<div class="bg-orange-100 rounded-lg px-4 h-48 py-8 w-full items-center">
+				<div v-dragscroll style="white-space: nowrap; overflow-x: hidden; overflow-y: hidden;">
+					<div
+						class="inline-block px-4"
+						v-for="(category, idx) in categories"
+						:key="idx"
+						style="width: 224px"
+					>
+						<div class="shadow-md bg-orange-100 rounded-lg h-64 w-full items-center relative">
 							<div
-								class="h-20 w-20 flex items-center justify-center rounded-full text-orange-600 bg-orange-200 mx-auto mb-3"
+								class="h-12 w-12 flex items-center justify-center rounded-full text-orange-600 absolute left-0 top-0 m-4 shadow-md"
+								style="background-color: rgba(255,255,255, 0.75)"
 							>
 								<unicon
 									v-if="category.category_name == 'Learning'"
@@ -112,13 +118,90 @@
 								></unicon>
 
 								<unicon v-else name="book-open" fill="currentColor" width="32" height="32"></unicon>
-								<!-- <img src="/bg-hero2.jpg" alt class="object-cover rounded-full h-24 w-24" /> -->
 							</div>
 
-							<span
-								class="mb-1 block text-center text-gray-600 text-sm font-sans font-bold leading-none uppercase tracking-wider"
-							>{{ category.category_name }}</span>
-							<span class="block text-sm text-center text-gray-500">{{category.total}} events</span>
+							<img
+								v-if="category.category_name == 'Learning'"
+								src="/categories/learning.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name === 'Sports'"
+								src="/categories/sports.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name === 'Arts'"
+								src="/categories/art.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name === 'Careers and Bussiness'"
+								src="/categories/business.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name === 'Food and Drinks'"
+								src="/categories/foods.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'Plays'"
+								src="/categories/plays.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name === 'Exhibitions'"
+								src="/categories/exhibition.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'Music'"
+								src="/categories/music.jpeg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'Health and Fitness'"
+								src="/categories/fitness.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'Concerts'"
+								src="/categories/concerts.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'For kids'"
+								src="/categories/kids.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+							<img
+								v-else-if="category.category_name == 'Outdoor and Adventures'"
+								src="/categories/adventure.jpg"
+								alt
+								class="object-cover h-64 w-full block rounded-lg"
+							/>
+
+							<div
+								class="absolute left-0 right-0 bottom-0 mx-4 mb-4 rounded-lg px-4 py-3"
+								style="background-color: rgba(255,255,255, 0.95)"
+							>
+								<span
+									class="block truncate text-center text-gray-700 font-sans font-bold leading-tight"
+								>{{ category.category_name }}</span>
+								<span class="block text-sm text-center text-orange-500">{{category.total}} events</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -180,6 +263,8 @@ import EventCard from "./Front/Events/Card";
 import EventAdvertiseCard from "./Front/Events/AdvertiseCard";
 import SubscriptionForm from "./Front/Subscription";
 
+import { dragscroll } from "vue-dragscroll";
+
 export default {
 	components: {
 		Layout,
@@ -203,6 +288,10 @@ export default {
 
 	data() {
 		return {};
+	},
+
+	directives: {
+		dragscroll: dragscroll
 	}
 };
 </script>
