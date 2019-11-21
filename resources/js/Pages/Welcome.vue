@@ -146,36 +146,25 @@
 						</div>
 					</div>
 					<div class="w-4/5 relative px-4">
-						<!-- <heading size="display2" class="mb-2">Add life to your days, not days to your life.</heading> -->
 						<div class="flex items-center mb-4">
 							<heading size="small-caps" class="text-orange-500 md:ml-10">Quote of the day</heading>
 							<div class="h-1 bg-orange-200 flex-1 ml-5"></div>
 						</div>
 
-						<heading
-							size="display"
-							class="mb-4 md:ml-10"
-						>Twenty years from now you will be more disappointed by the things you didn’t do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover.</heading>
-						<heading class="text-orange-500 md:ml-10 italic">- Mark Twain</heading>
-
-						<!-- <loading-button variant="warning" class="mt-4">Get Started Now</loading-button> -->
+						<div
+							class="text-4xl md:text-5xl text-gray-700 font-semibold font-serif mb-1 md:ml-10 italic leading-tight"
+						>Life is either a great adventure or nothing.</div>
+						<heading class="text-orange-500 md:ml-10 italic">- Helen Keller</heading>
 					</div>
-
-					<!-- <div class="w-1/3 px-4 text-center relative"> -->
-					<!-- <div
-							class="mx-auto w-32 h-32 md:w-64 md:h-64 bg-orange-200 relative rounded-full overflow-hidden"
-						>
-							<img
-								src="/run.svg"
-								alt="subscribe-email"
-								class="z-20 object-cover object-center w-64 mx-auto -mb-6 absolute left-0 right-0 bottom-0"
-							/>
-					</div>-->
-					<!-- <img src="/run.svg" alt="run" class="object-cover object-center w-64 mx-auto" /> -->
-					<!-- </div> -->
 				</div>
 			</div>
+
+			<div class="-mb-1 absolute right-0 bottom-0 w-10 h-10 rounded-full bg-orange-300 block"></div>
+			<div class="-mb-2 absolute right-0 mr-10 bottom-0 w-24 h-24 rounded-full bg-orange-200 block"></div>
+			<div class="-mb-2 absolute right-0 mr-32 bottom-0 w-5 h-5 rounded-full bg-orange-300 block"></div>
 		</div>
+
+		<subscription-form></subscription-form>
 	</layout>
 </template>
 
@@ -189,6 +178,7 @@ import LoadingButton from "@/Shared/tuis/LoadingButton";
 import MediaObject from "@/Shared/tuis/MediaObject";
 import EventCard from "./Front/Events/Card";
 import EventAdvertiseCard from "./Front/Events/AdvertiseCard";
+import SubscriptionForm from "./Front/Subscription";
 
 export default {
 	components: {
@@ -200,7 +190,8 @@ export default {
 		LoadingButton,
 		MediaObject,
 		EventCard,
-		EventAdvertiseCard
+		EventAdvertiseCard,
+		SubscriptionForm
 	},
 
 	props: {

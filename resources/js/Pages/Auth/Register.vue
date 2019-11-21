@@ -56,7 +56,7 @@
 								</div>-->
 
 								<alert :with-icon="false" variant="warning" class="mt-6">
-									By creating an account you agree to Happenings
+									By creating an account you agree to Grab Your Event
 									<link-to to="#">Terms of Service</link-to>&nbsp;and
 									<link-to to="#">Privacy Policy</link-to>.
 								</alert>
@@ -80,7 +80,7 @@
 						</div>
 					</div>
 				</card>
-				<div class="text-center mt-4 text-sm text-gray-500">2019 &copy; Happenings</div>
+				<div class="text-center mt-4 text-sm text-gray-500">Copyrights &copy; 2019 grabyourevent.com</div>
 			</div>
 		</div>
 	</div>

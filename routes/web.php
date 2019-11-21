@@ -65,9 +65,11 @@ Route::get('/faq', function () {
 
 
 Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
+    // return Inertia::render('Auth/Login');
+    return Inertia::render('Subscribe');
 });
 
 Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
+    // return Inertia::render('Auth/Register');
+    return Inertia::render('Subscribe');
 });

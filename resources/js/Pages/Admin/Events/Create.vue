@@ -145,7 +145,12 @@
 							<div class="md:w-2/3 px-4">
 								<card>
 									<div class="mb-4" style="height:500px;">
-										<location-picker v-model="location" :options="options" @input="getLocation"></location-picker>
+										<location-picker
+											v-model="location"
+											:options="options"
+											@input="getLocation"
+											class="rounded-lg"
+										></location-picker>
 									</div>
 
 									<div class="flex flex-wrap -mx-4 mb-4">
@@ -200,7 +205,7 @@
 									<textarea-input
 										label="Meta Description"
 										class="mb-4"
-										placeholder="eg. Ability to write code – HTML & CSS (SCSS flavor of SASS preferred when writing CSS)Proficient in Photoshop, Illustrator, bonus points for familiarity with Sketch (Sketch is our preferred concepting)Cross-browser and platform testing as standard practiceExperience using Invision a plusExperience in video production a plus or, at a minimum, a willingness to learn"
+										placeholder="Write short description of your event"
 										v-model="event.meta_description"
 										:errors="errors['meta_description']"
 										@keydown="delete errors['meta_description']"

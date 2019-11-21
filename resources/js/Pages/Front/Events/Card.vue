@@ -27,14 +27,19 @@
                     <heading size="large" class="md:truncate block md:w-48">{{
                         event.event_name
                     }}</heading>
-                    <div class="text-gray-500 text-sm">
+                    <div
+                        class="text-gray-500 text-sm md:truncate block md:w-48"
+                    >
                         {{ event.event_location }}
                     </div>
                 </div>
             </div>
 
             <div class="flex bg-white text-sm justify-between items-center">
-                <heading v-html="event.event_ticket_price"></heading>
+                <heading
+                    v-html="event.event_ticket_price"
+                    class="font-semibold"
+                ></heading>
             </div>
         </div>
     </card>

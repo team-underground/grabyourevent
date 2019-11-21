@@ -3,8 +3,9 @@
 		<!-- featured events -->
 		<div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
 			<div class="container mx-auto">
-				<div class="flex justify-center mb-16">
-					<heading size="heading" class="text-center">Events around North East {{events_count}}</heading>
+				<div class="flex flex-col justify-center mb-16">
+					<heading size="heading" class="text-center">Events around North East</heading>
+					<heading class="text-center italic">({{events_count}} found)</heading>
 				</div>
 				<div class="flex flex-wrap flex-col -mx-4 mb-10">
 					<div class="md:flex md:flex-wrap md:flex-1">

@@ -1,34 +1,25 @@
 <template>
-    <layout>
-        <div class="px-4 lg:px-6 py-5 md:py-10 bg-gray-100">
-            <div class="max-w-6xl mx-auto">
-                <card :is-padding="false" class="mb-10">
-                    <div class="md:flex md:flex-wrap relative">
-                        <div class="md:w-1/2 bg-gray-100">
-                            <img
-                                :src="event.event_image_path"
-                                alt="bg-image"
-                                class="w-full h-full"
-                            />
-                        </div>
-                        <div
-                            class="md:w-1/2 md:flex md:flex-col justify-between"
-                        >
-                            <svg
-                                class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-white -ml-12"
-                                viewBox="0 0 100 100"
-                                preserveAspectRatio="none"
-                            >
-                                <polygon points="50,0 100,0 50,100 0,100" />
-                            </svg>
-                            <div class="px-8 md:px-12 py-6">
-                                <span
-                                    class="bg-orange-200 text-orange-600 rounded-full text-sm inline-block uppercase px-2 tracking-wide mb-2 font-semibold"
-                                    >{{ event.category_name }}</span
-                                >
-                                <heading size="heading2" class="mb-4">{{
-                                    event.event_name
-                                }}</heading>
+	<layout>
+		<div class="px-4 lg:px-6 py-5 md:py-10 bg-gray-100">
+			<div class="max-w-6xl mx-auto">
+				<card :is-padding="false" class="mb-10">
+					<div class="md:flex md:flex-wrap relative">
+						<div class="md:w-1/2 bg-gray-100">
+							<img :src="event.event_image_path" alt="bg-image" class="w-full h-full" />
+						</div>
+						<div class="md:w-1/2 md:flex md:flex-col justify-between">
+							<svg
+								class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-white -ml-12"
+								viewBox="0 0 100 100"
+								preserveAspectRatio="none"
+							>
+								<polygon points="50,0 100,0 50,100 0,100" />
+							</svg>
+							<div class="px-8 md:px-12 py-6">
+								<span
+									class="bg-orange-200 text-orange-600 rounded-full text-sm inline-block uppercase px-2 tracking-wide mb-2 font-semibold"
+								>{{event.category_name}}</span>
+								<heading size="heading2" class="mb-4">{{event.event_name}}</heading>
 
                                 <media-object>
                                     <template #mediaimage>
