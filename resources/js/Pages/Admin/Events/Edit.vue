@@ -2,20 +2,39 @@
 	<layout>
 		<div class="bg-white px-4 pt-6 pb-4 relative shadow-sm z-20">
 			<div class="max-w-6xl mx-auto">
-				<link-to to="/admin/events" class="mb-2">
+				<link-to tag="inertia-link" :to="route('admin.events.index')" class="mb-2">
 					<icon name="chevron-left" class="-ml-2"></icon>Back to Events
 				</link-to>
-				<div class="flex w-full justify-between items-center">
+				<div class="md:flex items-center">
 					<div class="flex-1">
-						<heading size="heading">Create New Event</heading>
+						<heading size="heading" class="inline-flex mr-1">Edit Event #{{ event.event_id }}</heading>
+						<badge
+							variant="success"
+							v-if="event.event_status === 'Published'"
+							class="ml-3"
+						>{{ event.event_status }}</badge>
+						<badge variant="warning" v-if="event.event_status === 'Moderation'">{{ event.event_status }}</badge>
 					</div>
-					<div>
+					<div class="flex">
 						<loading-button
+							type="button"
 							size="small"
-							ref="eventSaveButton"
-							class="mt-2 md:mt-0"
-							@click="saveEvent"
-						>Save Event</loading-button>
+							ref="eventPublishButton"
+							variant="success"
+							@click="publishEvent"
+							v-if="can['publish-event']"
+						>Publish Event</loading-button>
+
+						<loading-button
+							type="submit"
+							size="small"
+							ref="eventUpdateButton"
+							@click="updateEvent"
+						>Update Event</loading-button>
+
+						<loading-button type="button" size="small" variant="danger" variant-type="outline">
+							<icon name="trash"></icon>
+						</loading-button>
 					</div>
 				</div>
 			</div>
@@ -35,14 +54,37 @@
 							</div>
 							<div class="md:w-2/3 px-4">
 								<card>
-									<file-input
-										v-model="event.event_image"
-										label="Event Image"
-										:errors="errors['event_image']"
-										class="mb-4"
-									></file-input>
+									<div class="mb-4 h-30" v-if="event.event_image == null">
+										<file-input
+											v-model="form.event_image"
+											label="Event Image"
+											:errors="errors['event_image']"
+										></file-input>
+									</div>
+
+									<div class="mb-4" v-else>
+										<label class="block mb-1 font-semibold text-gray-700">Event Image</label>
+										<div class="flex items-center">
+											<div
+												class="w-24 h-24 p-2 items-center justify-center rounded-full inline-flex bg-gray-100 mr-5 text-gray-400 shadow-inner"
+											>
+												<img
+													:src="event.event_image_path"
+													:alt="event.event_name"
+													class="w-24 h-24 object-contain rounded-full border border-gray-100"
+												/>
+											</div>
+											<div>
+												<button
+													type="button"
+													class="rounded-lg px-5 py-2 bg-red-100 hover:bg-red-200 text-sm font-medium text-red-600"
+													@click="deleteEventImage(event.uuid)"
+												>Delete</button>
+											</div>
+										</div>
+									</div>
 									<text-input
-										v-model="event.event_name"
+										v-model="form.event_name"
 										label="Name of Event"
 										placeholder="eg. Bacardi NH7 Weekender 2019, Meghalaya"
 										class="mb-4"
@@ -54,7 +96,7 @@
 											label="Event Start Date"
 											class="w-48 px-4"
 											placeholder="Select date"
-											v-model="event.event_start_date"
+											v-model="form.event_start_date"
 											:errors="errors['event_starting_date']"
 											@input="delete errors['event_starting_date']"
 											readonly
@@ -62,7 +104,7 @@
 										<time-picker
 											:minute-interval="15"
 											label="Time"
-											v-model="event.event_start_time"
+											v-model="form.event_start_time"
 											class="w-1/2 px-4"
 											close-on-complete
 											hide-clear-button
@@ -74,7 +116,7 @@
 											label="Event End Date"
 											class="w-48 px-4"
 											placeholder="Select date"
-											v-model="event.event_end_date"
+											v-model="form.event_end_date"
 											:errors="errors['event_ending_date']"
 											@input="delete errors['event_ending_date']"
 											readonly
@@ -82,7 +124,7 @@
 										<time-picker
 											:minute-interval="15"
 											label="Time"
-											v-model="event.event_end_time"
+											v-model="form.event_end_time"
 											class="w-1/2 px-4"
 											close-on-complete
 											hide-clear-button
@@ -92,7 +134,7 @@
 									<div class="flex -mx-4 mb-4">
 										<div class="px-4 w-1/2">
 											<select-input
-												v-model="event.event_category"
+												v-model="form.event_category"
 												label="Category"
 												:options="categories"
 												:errors="errors['event_category']"
@@ -103,7 +145,7 @@
 										</div>
 										<div class="px-4 w-1/2">
 											<text-input
-												v-model="event.artist_name"
+												v-model="form.artist_name"
 												label="Name of the Artist"
 												placeholder="eg. Shankuraj Konwar"
 												:errors="errors['artist_name']"
@@ -114,14 +156,14 @@
 
 									<simple-editor
 										label="Description"
-										v-model="event.event_description"
+										v-model="form.event_description"
 										class="mb-4"
 										:errors="errors['event_description']"
 										@keydown="delete errors['event_description']"
 									></simple-editor>
 									<simple-editor
 										label="Optional Description"
-										v-model="event.optional_description"
+										v-model="form.optional_description"
 										class="mb-4"
 										:errors="errors['optional_description']"
 										@keydown="delete errors['optional_description']"
@@ -129,7 +171,7 @@
 
 									<tags-input
 										label="Event Keywords"
-										v-model="event.event_keywords"
+										v-model="form.event_keywords"
 										class="mb-4"
 										:errors="errors['event_keywords']"
 										@keydown="delete errors['event_keywords']"
@@ -161,7 +203,7 @@
 											<text-input
 												label="Name of location / Hotel"
 												placeholder="e.g. Bibekananda Kendra"
-												v-model="event.event_location"
+												v-model="form.event_location"
 												:errors="errors['event_location']"
 												@keydown="delete errors['event_location']"
 											></text-input>
@@ -170,7 +212,7 @@
 											<text-input
 												label="Event City"
 												placeholder="e.g. Guwahati"
-												v-model="event.event_city"
+												v-model="form.event_city"
 												:errors="errors['event_city']"
 												@keydown="delete errors['event_city']"
 											></text-input>
@@ -179,7 +221,7 @@
 											<text-input
 												label="Event Pincode"
 												placeholder="e.g. 781001"
-												v-model="event.event_pincode"
+												v-model="form.event_pincode"
 												:errors="errors['event_pincode']"
 												@keydown="delete errors['event_pincode']"
 											></text-input>
@@ -188,7 +230,7 @@
 											<text-input
 												label="Event State"
 												placeholder="e.g. Assam"
-												v-model="event.event_state"
+												v-model="form.event_state"
 												:errors="errors['event_state']"
 												@keydown="delete errors['event_state']"
 											></text-input>
@@ -209,13 +251,13 @@
 										label="Meta Description"
 										class="mb-4"
 										placeholder="Write short description of your event"
-										v-model="event.meta_description"
+										v-model="form.meta_description"
 										:errors="errors['meta_description']"
 										@keydown="delete errors['meta_description']"
 									></textarea-input>
 									<tags-input
 										label="Meta Keywords"
-										v-model="event.meta_keywords"
+										v-model="form.meta_keywords"
 										class="mb-4"
 										:errors="errors['meta_keywords']"
 										@keydown="delete errors['meta_keywords']"
@@ -225,7 +267,7 @@
 										label="SEO Title"
 										class="mb-4"
 										placeholder="eg. Senior web developer in guwahati"
-										v-model="event.seo_title"
+										v-model="form.seo_title"
 										:errors="errors['seo_title']"
 										@keydown="delete errors['seo_title']"
 									></text-input>
@@ -258,6 +300,7 @@ import EmptyState from "@/Shared/tuis/EmptyState";
 import TagsInput from "@/Shared/tuis/TagsInput";
 import TimePicker from "@/Shared/tuis/TimePicker";
 import LocationPicker from "@/Shared/tuis/LocationPicker";
+import Badge from "@/Shared/tuis/Badge";
 
 const date = new Date();
 const day = date.getDate();
@@ -284,14 +327,15 @@ export default {
 		EmptyState,
 		TagsInput,
 		TimePicker,
-		LocationPicker
+		LocationPicker,
+		Badge
 	},
-	props: ["errors", "categories"],
+	props: ["errors", "categories", "event", "can"],
 	data() {
 		return {
 			location: {
-				lat: 26.1927742,
-				lng: 91.75283990000003
+				lat: parseFloat(this.event.latitude),
+				lng: parseFloat(this.event.longitude)
 			},
 			options: {
 				// is not required
@@ -307,46 +351,46 @@ export default {
 					/** autocomplete options **/
 				}
 			},
-			event: {
+			form: {
 				event_image: null,
-				event_name: null,
-				event_start_date: currentDate,
-				event_start_time: {
-					HH: "00",
-					mm: "00"
-				},
-				event_end_date: currentDate,
-				event_end_time: {
-					HH: "00",
-					mm: "00"
-				},
-				event_category: null,
-				event_description:
-					"<p>Majuli Music Festival, an entity of Majuli Music Foundation aims to protect the music, art, culture, and eco diversity of the island; thereby using music as a medium for people to connect and learn about Majuli.&nbsp;</p><p><br></p><p><br></p><p>A vision to promote rural tourism, uplift the local community and make the island self sufficient gave birth to Majuli Music Festival. The purpose of this initiative stretches far beyond curating a platform for musicians and artists. It strives to offer visitors a plethora of experiences - music, art, cultural exchange, local food and beer; everything amidst the mesmerising natural beauty of Majuli. The tagline - “Music For Change” explains our motive.</p>",
-				optional_description:
-					"<p><strong>Artist Line-up and their description:</strong></p><p>The artist line up at Majuli Music Festival 2019 comprises of independent artists, bands and labels that believe in producing&nbsp;Music for Change and have been instrumental in doing so.</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Guru Rewben Mashangva</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;When Chai Met Toast</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;FishCurry Blues - By Kalyan Baruah</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Sparzana - By Jatin Sharma</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Folkswagon</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Fuzz Culture</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Nilotpal Bora</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Goldie Sohel</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Suhas Joshi</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Shanku and Project Bartalaap</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Abhi Saikia</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Rain In Sahara</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Island Warrior</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Bio and The Miri Band</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Alobo Naga</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Cultivators</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Lateral</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Abhilash Choudhury</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Eastern Soul Players</p><p>●&nbsp;&nbsp;&nbsp;&nbsp;Moniraj Hazarika</p>",
-				event_keywords: [],
-				meta_description: null,
-				meta_keywords: [],
-				seo_title: null,
-				event_location: null,
-				event_city: null,
-				event_pincode: null,
-				event_state: null,
-				latitude: null,
-				longitude: null
+				event_image_deleted:
+					this.event.event_image == null ? "yes" : "no",
+				event_name: this.event.event_name,
+				event_start_date: this.event.event_start_date_formatted,
+				event_start_time: this.event.event_start_time_formatted,
+				event_end_date: this.event.event_end_date_formatted,
+				event_end_time: this.event.event_end_time_formatted,
+				artist_name: this.event.artist_name,
+				event_category: this.getKeyByValue(
+					this.categories,
+					this.event.event_category
+				),
+				event_description: this.event.event_description,
+				optional_description: this.event.optional_description,
+				event_keywords: this.event.event_keywords,
+				meta_description: this.event.meta_description,
+				meta_keywords: this.event.meta_keywords,
+				seo_title: this.event.seo_title,
+				event_location: this.event.event_location,
+				event_city: this.event.event_city,
+				event_pincode: this.event.event_pincode.toString(),
+				event_state: this.event.event_state,
+				latitude: parseFloat(this.event.latitude),
+				longitude: parseFloat(this.event.longitude)
 			}
 		};
 	},
 	methods: {
+		getKeyByValue(obj, value) {
+			return Object.keys(obj).find(key => obj[key] == value);
+		},
 		formattedDate(date) {
 			let strArray = date.split("/");
 			return `${strArray[2]}-${strArray[1]}-${strArray[0]}`;
 		},
 		getLocation({ location, address }) {
 			Object.assign(this.location, location);
-
-			Object.assign(this.event, {
+			Object.assign(this.form, {
 				event_location: address.place_name,
 				event_city: address.locality,
 				event_pincode: address.postal_code,
@@ -355,40 +399,40 @@ export default {
 				longitude: location.lng
 			});
 		},
-		saveEvent() {
-			this.$refs.eventSaveButton.startLoading();
-			Object.assign(this.event, {
+		updateEvent() {
+			this.$refs.eventUpdateButton.startLoading();
+			Object.assign(this.form, {
 				event_starting_date:
-					this.formattedDate(this.event.event_start_date) +
+					this.formattedDate(this.form.event_start_date) +
 					` ${
-						this.event.event_start_time
-							? this.event.event_start_time["HH"] &&
-							  this.event.event_start_time["HH"] != ""
-								? this.event.event_start_time["HH"]
+						this.form.event_start_time
+							? this.form.event_start_time["HH"] &&
+							  this.form.event_start_time["HH"] != ""
+								? this.form.event_start_time["HH"]
 								: "00"
 							: "00"
 					}:${
-						this.event.event_start_time
-							? this.event.event_start_time["mm"] &&
-							  this.event.event_start_time["mm"] != ""
-								? this.event.event_start_time["mm"]
+						this.form.event_start_time
+							? this.form.event_start_time["mm"] &&
+							  this.form.event_start_time["mm"] != ""
+								? this.form.event_start_time["mm"]
 								: "00"
 							: "00"
 					}:00`,
 				event_ending_date:
-					this.formattedDate(this.event.event_end_date) +
+					this.formattedDate(this.form.event_end_date) +
 					` ${
-						this.event.event_end_time
-							? this.event.event_end_time["HH"] &&
-							  this.event.event_end_time["HH"] != ""
-								? this.event.event_end_time["HH"]
+						this.form.event_end_time
+							? this.form.event_end_time["HH"] &&
+							  this.form.event_end_time["HH"] != ""
+								? this.form.event_end_time["HH"]
 								: "00"
 							: "00"
 					}:${
-						this.event.event_end_time
-							? this.event.event_end_time["mm"] &&
-							  this.event.event_end_time["mm"] != ""
-								? this.event.event_end_time["mm"]
+						this.form.event_end_time
+							? this.form.event_end_time["mm"] &&
+							  this.form.event_end_time["mm"] != ""
+								? this.form.event_end_time["mm"]
 								: "00"
 							: "00"
 					}:00`
@@ -400,18 +444,21 @@ export default {
 				event_end_date,
 				event_end_time,
 				...formattedEvent
-			} = this.event;
+			} = this.form;
 
 			let formData = new FormData();
 			this.getFormData(formData, formattedEvent);
 
 			this.$inertia
-				.post(this.route("admin.events.store"), formData)
+				.post(
+					this.route("admin.events.update", `${this.event.uuid}`),
+					formData
+				)
 				.then(() => {
-					this.$refs.eventSaveButton.stopLoading();
+					this.$refs.eventUpdateButton.stopLoading();
 				})
 				.catch(() => {
-					this.$refs.eventSaveButton.stopLoading();
+					this.$refs.eventUpdateButton.stopLoading();
 				});
 		},
 		getFormData(formData, data, previousKey) {
@@ -435,6 +482,30 @@ export default {
 						formData.append(key, value || "");
 					}
 				});
+			}
+		},
+
+		publishEvent() {
+			this.$refs.eventPublishButton.startLoading();
+
+			this.$inertia
+				.post(this.route("admin.events.publish", this.event.uuid), {
+					_method: "post"
+				})
+				.then(() => {
+					this.$refs.eventPublishButton.stopLoading();
+				})
+				.catch(() => {
+					this.$refs.eventPublishButton.stopLoading();
+				});
+		},
+
+		deleteEventImage(uuid) {
+			if (confirm("Are you sure you want to delete this image?")) {
+				this.$inertia.delete(
+					this.route("admin.events.deleteimage", uuid)
+				);
+				this.form.event_image_deleted = "yes";
 			}
 		}
 	}

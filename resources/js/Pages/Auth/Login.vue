@@ -42,21 +42,37 @@
 
 					<heading size="heading2" class="mb-1 text-center">Welcome back</heading>
 					<heading class="mb-6 text-center" size="small">Please enter your email and password to continue</heading>
-					<text-input class="mb-4" with-icon placeholder="Email address">
-						<template #icon>
-							<unicon name="envelope" fill="#ddd" width="30" height="30" class="mt-2"></unicon>
-						</template>
-					</text-input>
-
-					<div class="relative">
-						<text-input type="password" class="mb-5" with-icon placeholder="Password">
+					<form @submit.prevent="submit">
+						<text-input
+							class="mb-4"
+							with-icon
+							placeholder="Email address"
+							v-model="form.email"
+							:errors="errors['email']"
+							@keydown="delete errors['email']"
+						>
 							<template #icon>
-								<unicon name="lock" fill="#ddd" width="30" height="30" class="mt-2"></unicon>
+								<unicon name="envelope" fill="#ddd" width="30" height="30" class="mt-2"></unicon>
 							</template>
 						</text-input>
-					</div>
-					<loading-button ref="submitButton" class="w-full" variant="warning">Sign in</loading-button>
 
+						<div class="relative">
+							<text-input
+								type="password"
+								class="mb-5"
+								with-icon
+								placeholder="Password"
+								v-model="form.password"
+								:errors="errors['password']"
+								@keydown="delete errors['password']"
+							>
+								<template #icon>
+									<unicon name="lock" fill="#ddd" width="30" height="30" class="mt-2"></unicon>
+								</template>
+							</text-input>
+						</div>
+						<loading-button ref="submitButton" class="w-full" variant="warning" type="submit">Sign in</loading-button>
+					</form>
 					<a class="text-gray-500 hover:text-orange-700 block mt-4" href="#">Forgot Password?</a>
 
 					<!-- </div>
@@ -83,6 +99,7 @@ import LoadingButton from "@/Shared/tuis/LoadingButton";
 import TextInput from "@/Shared/tuis/TextInput";
 
 export default {
+	props: ["errors"],
 	components: {
 		Layout,
 		Card,
@@ -90,6 +107,25 @@ export default {
 		LinkTo,
 		LoadingButton,
 		TextInput
+	},
+	data() {
+		return {
+			form: {
+				email: null,
+				password: null
+			}
+		};
+	},
+	methods: {
+		submit() {
+			this.$refs.submitButton.startLoading();
+
+			this.$inertia
+				.post(this.route("login.attempt"), this.form)
+				.then(() => {
+					this.$refs.submitButton.stopLoading();
+				});
+		}
 	}
 };
 </script>

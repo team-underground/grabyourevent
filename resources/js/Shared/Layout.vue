@@ -1,6 +1,6 @@
 <template>
 	<main class="flex w-100 flex-col min-h-screen">
-		<div class="bg-white shadow-base px-4 relative z-20 md:z-20 lg:py-2">
+		<div class="bg-white px-4 relative z-30 md:z-30 lg:py-2" :class="{'shadow-sm' : !isUrl('')}">
 			<div class="container md:flex items-center justify-between mx-auto">
 				<div class="flex justify-between md:flex-none items-center">
 					<inertia-link href="/" class="py-2 md:py-0">
@@ -27,6 +27,7 @@
 				<div class="hidden md:block">
 					<!-- v-if="$page.auth.user" -->
 					<inertia-link
+						v-if="$page.auth.user"
 						href="/dashboard"
 						:class="isUrl('dashboard') ? 'text-orange-600 menu-active' : 'text-gray-500'"
 						class="mr-6 py-6 inline-block font-medium hover:text-orange-600"
@@ -44,7 +45,7 @@
 					<!-- <a
 						href="/tickets"
 						class="px-4 mr-3 py-5 inline-block font-medium text-gray-500 hover:text-orange-600"
-					>Tickets</a> -->
+					>Tickets</a>-->
 
 					<inertia-link
 						href="/this-month"
@@ -54,12 +55,66 @@
 				</div>
 
 				<div class="hidden md:block">
+					<template v-if="$page.auth.user">
+						<dropdown>
+							<template #trigger>
+								<div class="flex items-center">
+									<div
+										class="outline-none block inline-flex items-center justify-center h-10 w-10 overflow-hidden rounded-full shadow-inner bg-gray-500 text-white font-bold text-xl"
+									>{{ $page.auth.user.name.charAt(0) }}</div>
+									<div class="text-left ml-2">
+										<span class="text-sm leading-tight block w-32 truncate">{{ $page.auth.user.name }}</span>
+										<span
+											class="leading-tight text-gray-400 block text-xs uppercase tracking-wider font-semibold"
+										>{{ $page.auth.user.type }}</span>
+									</div>
+								</div>
+							</template>
+							<template #dropdown>
+								<div
+									class="mt-2 bg-white rounded-lg border-t border-gray-100 w-48 py-1 shadow-lg overflow-hidden"
+								>
+									<inertia-link
+										class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+										:href="route('admin.events.index')"
+									>All Events</inertia-link>
+
+									<inertia-link
+										class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+										href="#"
+									>Notifications</inertia-link>
+									<inertia-link
+										class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+										href="/settings"
+									>Settings</inertia-link>
+
+									<div class="border-t my-1 border-gray-200"></div>
+
+									<inertia-link
+										class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+										:href="route('logout')"
+										method="post"
+									>Logout</inertia-link>
+								</div>
+							</template>
+						</dropdown>
+					</template>
+					<template v-else>
+						<inertia-link
+							href="/login"
+							class="px-4 py-5 mr-3 inline-block font-medium text-gray-600 hover:text-orange-600"
+						>Log in</inertia-link>
+						<loading-button tag="inertia-link" to="/register" variant="warning" size="small">Sign up</loading-button>
+					</template>
+				</div>
+
+				<!-- <div class="hidden md:block">
 					<inertia-link
 						href="/login"
 						class="px-4 py-5 mr-3 inline-block font-medium text-gray-600 hover:text-orange-600"
 					>Log in</inertia-link>
 					<loading-button tag="a" to="/register" variant="warning" size="small">Sign up</loading-button>
-				</div>
+				</div>-->
 			</div>
 
 			<div class="md:hidden" v-if="showNavbar">
@@ -193,9 +248,10 @@ export default {
 				return location.pathname.substr(1) === "";
 			}
 
-			return urls.filter(url =>
-				// location.pathname.substr(1).startsWith(url)
-				location.pathname.substr(1) == url
+			return urls.filter(
+				url =>
+					// location.pathname.substr(1).startsWith(url)
+					location.pathname.substr(1) == url
 			).length;
 		}
 	}

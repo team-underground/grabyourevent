@@ -26,14 +26,18 @@ Route::get('/events', 'EventsController@index')->name('events.index');
 Route::get('/this-month', 'EventsController@index')->name('events.index');
 Route::get('/events/{event_slug}', 'EventsController@show')->name('events.show');
 
-// admin events
-Route::get('/admin/events', 'Admin\EventsController@index')->name('admin.events.index');
-Route::get('/admin/events/create', 'Admin\EventsController@create')->name('admin.events.create');
-Route::post('/admin/events/create', 'Admin\EventsController@store')->name('admin.events.store');
-Route::get('/admin/events/{event}/edit', 'EventsController@edit')->name('admin.events.edit');
-
-Route::get('/dashboard', 'DashboardController')->name('dashboard');
-
+Route::middleware(['auth'])->group(function () {
+    //dashboard
+    Route::get('/dashboard', 'DashboardController')->name('dashboard');
+    // admin events
+    Route::get('/admin/events', 'Admin\EventsController@index')->name('admin.events.index');
+    Route::get('/admin/events/create', 'Admin\EventsController@create')->name('admin.events.create');
+    Route::post('/admin/events/create', 'Admin\EventsController@store')->name('admin.events.store');
+    Route::get('/admin/events/{event}/edit', 'Admin\EventsController@edit')->name('admin.events.edit');
+    Route::post('/admin/events/{event}/update', 'Admin\EventsController@update')->name('admin.events.update');
+    Route::post('/admin/events/{uuid}/publish', 'Admin\EventsPublishController@store')->name('admin.events.publish');
+    Route::delete('/admin/events/{uuid}/image', 'Admin\EventsController@deleteImage')->name('admin.events.deleteimage');
+});
 // buy tickets
 // Route::get('/events/{event}/buy', 'TicketBuyController@create')->name('tickets.buy.create');
 // Route::post('/events/{event}/buy', 'EventTicketController@store')->name('tickets.buy.store');
@@ -43,9 +47,9 @@ Route::get('/dashboard', 'DashboardController')->name('dashboard');
 // Route::get('/checkout', 'CheckoutController@create');
 // Route::post('/verify-payment', 'CheckoutController@verifyPayment');
 
-Route::get('/tickets', function () {
-    return Inertia::render('Tickets');
-});
+// Route::get('/tickets', function () {
+//     return Inertia::render('Tickets');
+// });
 
 Route::get('/single', function () {
     return Inertia::render('Single');
@@ -68,6 +72,17 @@ Route::get('/login', function () {
     // return Inertia::render('Auth/Login');
     return Inertia::render('Subscribe');
 });
+
+Route::get('/admin/login', function () {
+    return Inertia::render('Auth/Login');
+})->middleware('guest')->name('login');
+Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')->middleware('guest');
+Route::get('/home', function () {
+    return redirect('/dashboard');
+})->middleware('auth');
+
+Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
+
 
 Route::get('/register', function () {
     // return Inertia::render('Auth/Register');

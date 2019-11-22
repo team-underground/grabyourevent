@@ -25,13 +25,13 @@ class CreateEventsTable extends Migration
             $table->string('event_id');
             $table->string('event_name', 255);
             $table->string('event_slug', 255)->nullable();
-            $table->string('event_image', 255);
+            $table->string('event_image', 255)->nullable();
             $table->integer('event_category');
             $table->string('artist_name', 100)->nullable();
             $table->text('event_description');
             $table->text('optional_description');
             $table->json('what_is_included')->nullable();
-            $table->timestamp('event_starting_date');
+            $table->timestamp('event_starting_date')->nullable();
             $table->timestamp('event_ending_date')->nullable();
             $table->boolean('is_featured')->default(0);
 

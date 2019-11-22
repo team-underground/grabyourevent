@@ -36,7 +36,7 @@
 						>
 							<td class="border-t">
 								<link-to
-                                    tag="inertia-link"
+									tag="inertia-link"
 									:to="route('admin.events.edit',`${data.uuid}`)"
 									class="inline-block truncate mr-2 mx-6"
 								>{{ data.event_id }}</link-to>
@@ -58,13 +58,13 @@
 									<badge variant="warning" v-if="data.event_status === 'Moderation'">{{ data.event_status }}</badge>
 									<badge variant="success" v-if="data.event_status === 'Published'">{{ data.event_status }}</badge>
 								</span>
-							</td> 
+							</td>
 							<td class="border-t">
 								<span class="text-gray-700 px-6 py-4 flex items-center">{{ data.event_location }}</span>
 							</td>
 							<td class="border-t">
 								<span class="text-gray-700 px-6 py-4 flex items-center">{{ data.event_category }}</span>
-							</td> 
+							</td>
 						</tr>
 					</basic-table>
 					<empty-state class="lg:py-32" v-else>
@@ -74,9 +74,14 @@
 							<icon name="search" class="w-8 h-8"></icon>
 						</div>
 
-						<heading class="mt-5 mb-1" size="heading">No Events created by you</heading> 
+						<heading class="mt-5 mb-1" size="heading">No Events created by you</heading>
 
-						<loading-button tag="inertia-link" :to="route('admin.events.create')" size="small" class="mt-6">
+						<loading-button
+							tag="inertia-link"
+							:to="route('admin.events.create')"
+							size="small"
+							class="mt-6"
+						>
 							<icon name="plus" class="mr-1"></icon>Create Event
 						</loading-button>
 					</empty-state>
@@ -186,7 +191,7 @@ export default {
 				let query = _.pickBy(this.form);
 				this.$inertia.replace(
 					this.route(
-						"admin.events",
+						"admin.events.index",
 						Object.keys(query).length
 							? query
 							: { remember: "forget" }
@@ -207,9 +212,9 @@ export default {
 				"Created On",
 				"Event Name",
 				"Published at",
-				"Status", 
+				"Status",
 				"Location",
-				"Type", 
+				"Type"
 			]
 		};
 	},

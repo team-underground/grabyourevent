@@ -1357,7 +1357,7 @@ export default {
 	border-radius: 10px;
 	padding: 1rem;
 	z-index: 2000;
-	margin: 3px 0 0 0;
+	/* margin: 3px 0 0 0; */
 	border-top: 1px solid #eee;
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
 		0 4px 6px -2px rgba(0, 0, 0, 0.05); 
@@ -1399,7 +1399,7 @@ export default {
 .vue__time-picker .dropdown ul li:not([disabled]).active,
 .vue__time-picker .dropdown ul li:not([disabled]).active:hover,
 .vue__time-picker .dropdown ul li:not([disabled]).active:focus {
-  background: #41B883;
+  background: #3182ce;
   color: #fff;
 }
 .vue__time-picker .dropdown ul li[disabled],

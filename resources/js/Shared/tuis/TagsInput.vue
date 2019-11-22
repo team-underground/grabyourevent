@@ -21,7 +21,7 @@
 			</span>
 			<input
 				class="tags-input-text"
-				placeholder="Add tag..."
+				:placeholder="placeholder"
 				@keydown.enter.prevent="addTag"
 				v-model="newTag"
 				:readonly="disabled"
@@ -71,6 +71,10 @@ export default {
 		withIcon: {
 			type: Boolean,
 			default: false
+		},
+		placeholder: {
+			type: String,
+			default: "Add a tag"
 		}
 	},
 

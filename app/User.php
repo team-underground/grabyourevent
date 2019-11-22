@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Enums\UserType;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getTypeAttribute($value)
+    {
+        return UserType::getDescription($value);
+    }
+
+    public function isAdmin()
+    {
+        return $this->type == (UserType::getInstance(UserType::Administrator))->key;
+    }
+
+    public function isOrganiser()
+    {
+        return $this->type == (UserType::getInstance(UserType::Organiser))->key;
+    }
 }

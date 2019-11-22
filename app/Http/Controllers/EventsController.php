@@ -54,6 +54,8 @@ class EventsController extends Controller
     public function show($eventSlug)
     {
         $event = Event::with('organiser')->where('event_slug', $eventSlug)->firstOrFail();
+        // record page views
+        views($event)->record();
 
         return Inertia::render('Front/Events/Show', [
             'event' => new EventResource($event)

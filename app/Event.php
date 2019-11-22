@@ -16,17 +16,16 @@ use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 class Event extends BaseModel implements ViewableContract
 {
     use HasUuidTrait, Viewable;
-
     protected $casts = [
         "what_is_included" => "array",
-        "event_starting_date" => 'date',
-        "event_ending_date" => 'date',
         "meta_keywords" => "array"
     ];
 
-    protected $dates = ['event_published_at'];
+    protected $dates = [
+        'event_published_at', "event_starting_date",  "event_ending_date"
+    ];
 
-    protected $appends = ['event_image_path', 'event_image_orientation', 'event_published_at_formatted'];
+    protected $appends = ['event_image_path', 'event_image_orientation', 'event_published_at_formatted', 'event_keywords'];
 
     public function getRouteKeyName()
     {
@@ -77,6 +76,9 @@ class Event extends BaseModel implements ViewableContract
 
     public function getEventImageOrientationAttribute()
     {
+        if ($this->event_image == null) {
+            return 'no image found';
+        }
         list($width, $height) = getimagesize($this->event_image_path);
         if ($width > $height)
             return "landscape";
@@ -243,7 +245,7 @@ class Event extends BaseModel implements ViewableContract
     {
         if (auth()->check()) {
             if (auth()->user()->type == 'Organiser') {
-                $query->where('user_id', auth()->user()->id);
+                $query->where('organiser_id', auth()->user()->id);
             }
         }
     }
