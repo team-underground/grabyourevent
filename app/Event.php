@@ -25,7 +25,11 @@ class Event extends BaseModel implements ViewableContract
         'event_published_at', "event_starting_date",  "event_ending_date"
     ];
 
-    protected $appends = ['event_image_path', 'event_image_orientation', 'event_published_at_formatted', 'event_keywords'];
+    protected $appends = [
+        'event_image_path',
+        // 'event_image_orientation', 
+        'event_published_at_formatted', 'event_keywords'
+    ];
 
     public function getRouteKeyName()
     {
@@ -74,17 +78,17 @@ class Event extends BaseModel implements ViewableContract
         return $this->tags->pluck('name')->toArray();
     }
 
-    public function getEventImageOrientationAttribute()
-    {
-        if ($this->event_image == null) {
-            return 'no image found';
-        }
-        list($width, $height) = getimagesize($this->event_image_path);
-        if ($width > $height)
-            return "landscape";
-        else
-            return "portrait";
-    }
+    // public function getEventImageOrientationAttribute()
+    // {
+    //     if ($this->event_image == null) {
+    //         return 'no image found';
+    //     }
+    //     list($width, $height) = getimagesize($this->event_image_path);
+    //     if ($width > $height)
+    //         return "landscape";
+    //     else
+    //         return "portrait";
+    // }
 
     public function getEventStatusAttribute($value)
     {

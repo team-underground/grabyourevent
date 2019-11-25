@@ -15,7 +15,7 @@ class EventResource extends JsonResource
             "event_name" => $this->event_name,
             "event_slug" => $this->event_slug,
             "event_image_path" => $this->event_image_path,
-            "event_image_orientation" => $this->event_image_orientation,
+            // "event_image_orientation" => $this->event_image_orientation,
             "artist_name" => $this->artist_name,
             "event_description" => $this->event_description,
             "optional_description" => $this->optional_description,

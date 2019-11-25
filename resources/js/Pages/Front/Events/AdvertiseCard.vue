@@ -99,21 +99,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.triangle-orange {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 0 75px 75px;
-    border-color: transparent transparent #fffaf0 transparent;
-}
-
-.triangle-blue {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 0 75px 75px;
-    border-color: transparent transparent #ebf8ff transparent;
-}
-</style>

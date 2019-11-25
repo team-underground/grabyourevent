@@ -47,19 +47,3 @@ export default {
 	}
 };
 </script>
-
-<style>
-/* .list-style-one::before {
-	content: "";
-	width: 8px;
-	height: 8px;
-	background-color: blue;
-	display: inline-block;
-	vertical-align: middle;
-	border-radius: 50%;
-} */
-
-.list-style-ul:not(:last-child) {
-	margin-bottom: 0.75rem;
-}
-</style>
