@@ -232,26 +232,23 @@
                         <heading class="mb-3" size="small-caps"
                             >Grab Your Event</heading
                         >
-                        <a
+                        <inertia-link
                             href="/about"
                             class="block text-sm mb-2 hover:text-gray-500"
-                            >About</a
-                        >
-                        <a
-                            href="#"
+                            >About</inertia-link>
+                        
+                        <inertia-link
+                            href="/terms-of-services"
                             class="block text-sm mb-2 hover:text-gray-500"
-                            >Careers</a
-                        >
-                        <a
-                            href="#"
+                            >Terms of Services</inertia-link>
+                        <inertia-link
+                            href="/privacy-policy"
                             class="block text-sm mb-2 hover:text-gray-500"
-                            >Privacy &amp; Policy</a
-                        >
-                        <a
+                            >Privacy &amp; Policy</inertia-link>
+                        <inertia-link
                             href="/faq"
                             class="block text-sm mb-2 hover:text-gray-500"
-                            >Help</a
-                        >
+                            >Help</inertia-link>
                     </div>
 
                     <div class="w-1/2 md:w-1/4 px-4 mb-6">
@@ -261,11 +258,10 @@
                             class="block text-sm mb-2 hover:text-gray-500"
                             >Selling your tickets</a
                         >
-                        <a
-                            href="#"
+                        <inertia-link
+                            href="/contact-us"
                             class="block text-sm mb-2 hover:text-gray-500"
-                            >Contact us</a
-                        >
+                            >Contact us</inertia-link>
                         <a
                             href="#"
                             class="block text-sm mb-2 hover:text-gray-500"

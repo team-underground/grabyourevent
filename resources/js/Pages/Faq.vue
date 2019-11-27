@@ -4,7 +4,7 @@
 			<div class="max-w-5xl mx-auto">
 				<div class="flex items-center overflow-hidden">
 					<div class="w-2/3">
-						<heading size="small-caps" class="mb-1 text-orange-500">Help &amp; Support</heading>
+						<!-- <heading size="small-caps" class="mb-1 text-orange-500">Help &amp; Support</heading> -->
 						<heading size="display" class="mb-4">Frequently asked Questions</heading>
 					</div>
 					<div class="w-1/3 border-b-2 border-orange-200">
@@ -24,71 +24,57 @@
 		</div>
 
 		<div class="py-4 md:py-16">
-			<div class="max-w-3xl mx-auto">
+			<div class="max-w-5xl mx-auto">
 				<card :is-padding="false">
 					<accordion class="px-8">
-						<heading size="large" slot="title">How much does it cost to use GYE?</heading>
+						<heading size="large" slot="title">What events are published / listed on GYE?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>GYE lists information about concerts, plays, trade fairs, sports, seminars, conferences, spiritual events, corporate training, workshops, and the entire gamut of events. It is the go-to portal to be in the loop about what's happening, where and book tickets instantly.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
 					</accordion>
 					<accordion class="px-8">
-						<heading size="large" slot="title">Can I use GYE for free events?</heading>
+						<heading size="large" slot="title">How much does it cost to post an event?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>The process of event listing is completely free. Also, we collect the information about the event from the organizer.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
 					</accordion>
 					<accordion class="px-8">
-						<heading size="large" slot="title">How do I sell tickets on GYE?</heading>
+						<heading size="large" slot="title">How many cities is GYE available in?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>GYE lists events all over North-East and is aggressively working towards all over India.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
 					</accordion>
 					<accordion class="px-8">
-						<heading size="large" slot="title">How do I get money from GYE?</heading>
+						<heading size="large" slot="title">How Can I Contact You?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>Please vist <link-to tag="inertia-link" to="/contact-us">Contact Us</link-to> Page for all your queries and redressal of grievances.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
+						
 					</accordion>
 					<accordion class="px-8">
-						<heading size="large" slot="title">How do I get refund on GYE?</heading>
+						<heading size="large" slot="title">What can GYE do for an Event?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>GYE collects the information about the events and lists them by its own.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
+						
 					</accordion>
 					<accordion class="last px-8">
-						<heading size="large" slot="title">Can I cancel my free tickets on GYE?</heading>
+						<heading size="large" slot="title">What happens if an Event is cancelled?</heading>
 						<p
 							class="pb-5"
-						>Lorem ipsum dolor sit amet, ut alii voluptaria est, ad illum inimicus deterruisset eam. His eu bonorum adipisci definiebas, no vis nostrud conclusionemque. Ad his virtute accusata, pro habemus singulis temporibus ut, ne bonorum dolores euripidis quo. No nam amet erant intellegebat. Rationibus instructior id pri, vis case abhorreant ea, id sea meis feugiat.</p>
+						>In case of cancellation of any events, GYE will update it on the event listing.</p>
 
-						<p
-							class="pb-5"
-						>Ut vel percipit facilisi, sea partem veritus mandamus eu, at debet deleniti eos. Iudico suscipit mel ut. Per ad habeo sadipscing concludaturque. Pri lorem fastidii in, accusam honestatis signiferumque est ut, ea eos omnium senserit reprehendunt. Eu est nibh invenire.</p>
 					</accordion>
 				</card>
 			</div>
 		</div>
+
+		<contact-us></contact-us>
 	</layout>
 </template>
 
@@ -98,6 +84,8 @@ import Heading from "@/Shared/tuis/Heading";
 import Card from "@/Shared/tuis/Card";
 import LinkTo from "@/Shared/tuis/LinkTo";
 import Accordion from "@/Shared/tuis/Accordion";
+import ContactUs from "@/Pages/ContactUs";
+
 
 export default {
 	components: {
@@ -105,7 +93,8 @@ export default {
 		Heading,
 		Card,
 		LinkTo,
-		Accordion
+		Accordion,
+		ContactUs
 	}
 };
 </script>

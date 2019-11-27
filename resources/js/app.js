@@ -29,7 +29,8 @@ import {
     uniLock,
     uniBell,
     uniMoneyStack,
-    uniBoltAlt
+    uniBoltAlt,
+    uniMapMarker
 } from "vue-unicons/src/icons";
 
 Unicon.add([
@@ -59,7 +60,8 @@ Unicon.add([
     uniLock,
     uniBell,
     uniMoneyStack,
-    uniBoltAlt
+    uniBoltAlt,
+    uniMapMarker
 ]);
 
 Vue.mixin({ methods: { route: window.route } });

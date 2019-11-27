@@ -17,7 +17,13 @@ Route::get('/', 'WelcomeController');
 Route::get('/about', function () {
     return Inertia::render('About');
 });
-Route::get('/contact', function () {
+Route::get('/terms-of-services', function () {
+    return Inertia::render('Terms');
+});
+Route::get('/privacy-policy', function () {
+    return Inertia::render('Privacy');
+});
+Route::get('/contact-us', function () {
     return Inertia::render('Contact');
 });
 
@@ -88,3 +94,5 @@ Route::get('/register', function () {
     // return Inertia::render('Auth/Register');
     return Inertia::render('Subscribe');
 });
+
+Route::post('/contact/query', 'ContactsController')->name('contacts.query');

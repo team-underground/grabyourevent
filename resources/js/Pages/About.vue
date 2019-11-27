@@ -4,8 +4,8 @@
 			<div class="max-w-5xl mx-auto">
 				<div class="flex items-center overflow-hidden">
 					<div class="w-2/3">
-						<heading size="small-caps" class="mb-1 text-orange-500">All About</heading>
-						<heading size="display" class="mb-4">Grab Your Event</heading>
+						<!-- <heading size="small-caps" class="mb-1 text-orange-500">All About</heading> -->
+						<heading size="display" class="mb-4">About Grab Your Event</heading>
 					</div>
 					<div class="w-1/3 border-b-2 border-orange-200 relative">
 						<div
@@ -27,11 +27,11 @@
 			<div class="max-w-5xl mx-auto">
 				<heading
 					class="md:w-2/3 mb-4"
-				>Grabyourevent is a global platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives. From music festivals, marathons, conferences, community rallies, and fundraisers, to gaming competitions and air guitar contests. Our mission is to bring the world together through live experiences.</heading>
+				>Grabyourevent is a platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives. From music festivals, marathons, conferences, community rallies, and fundraisers, to gaming competitions and air guitar contests. Our mission is to bring the world together through live experiences. Uniquely harnessing the power of the social media, we have created a smarter way to discover and share information regarding events.</heading>
 
 				<heading
 					class="md:w-2/3 mb-10"
-				>Grabyourevent is a global platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives. From music festivals, marathons, conferences, community rallies, and fundraisers, to gaming competitions and air guitar contests. Our mission is to bring the world together through live experiences.</heading>
+				>We’re diverse group on mission to help people discover the events happening around us. Thousand of events happened in our North-East, but its difficult to find them out. Grab Your Event will help you to do that !</heading>
 
 				<div class="flex -mx-4 mb-10">
 					<div class="w-1/3 px-4">
@@ -41,7 +41,7 @@
 							<unicon name="ticket" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Buy Tickets</heading>
-						<heading>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ipsam eius cum qui, delectus minus ut excepturi, consectetur nostrum corrupti, dolorem et dicta cumque? Sequi blanditiis optio laborum voluptatem iure?</heading>
+						
 					</div>
 
 					<div class="w-1/3 px-4">
@@ -51,7 +51,7 @@
 							<unicon name="money-stack" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Sell Tickets</heading>
-						<heading>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ipsam eius cum qui, delectus minus ut excepturi, consectetur nostrum corrupti, dolorem et dicta cumque? Sequi blanditiis optio laborum voluptatem iure?</heading>
+						
 					</div>
 
 					<div class="w-1/3 px-4">
@@ -61,7 +61,7 @@
 							<unicon name="bolt-alt" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Get Sponsored</heading>
-						<heading>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ipsam eius cum qui, delectus minus ut excepturi, consectetur nostrum corrupti, dolorem et dicta cumque? Sequi blanditiis optio laborum voluptatem iure?</heading>
+						
 					</div>
 				</div>
 			</div>
