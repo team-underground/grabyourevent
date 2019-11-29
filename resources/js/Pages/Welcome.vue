@@ -6,18 +6,18 @@
         ></event-advertise-card>
 
         <!-- featured events -->
-        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
+        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100" v-if="featured.length > 0">
             <div class="container mx-auto">
                 <div class="flex justify-between mb-6">
                     <heading size="heading" class="text-center"
                         >Featured Events</heading
                     >
 
-                    <link-to to="#">View all</link-to>
+                    <link-to :to="route('events.index')" tag="inertia-link">View all</link-to>
                 </div>
                 <div class="md:flex md:flex-wrap md:flex-1 -mx-4 mb-10">
                     <div
-                        class="md:w-1/4 px-4 mb-8"
+                        class="md:w-1/4 px-4"
                         v-for="(event, idx2) in featured"
                         :key="idx2"
                     >
@@ -35,11 +35,11 @@
                         >Upcoming Events</heading
                     >
 
-                    <link-to to="#">View all</link-to>
+                    <link-to :to="route('events.index')" tag="inertia-link">View all</link-to>
                 </div>
                 <div class="md:flex md:flex-wrap md:flex-1 -mx-4 mb-10">
                     <div
-                        class="md:w-1/4 px-4 mb-8"
+                        class="md:w-1/4 px-4"
                         v-for="(event, idx2) in upcoming"
                         :key="idx2"
                     >

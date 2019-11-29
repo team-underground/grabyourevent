@@ -14,6 +14,7 @@
 				label="Ticket Price"
 				placeholder="e.g. 1000"
 				v-model="category.category_price"
+				v-numeric-float
 				:errors="errors['category_price']"
 				@keydown="delete errors['category_price']"
 			></text-input>
@@ -31,6 +32,7 @@
 				label="No of Tickets available"
 				placeholder="e.g. 100"
 				v-model="category.no_of_tickets_available"
+				v-numeric-only
 				:errors="errors['no_of_tickets_available']"
 				@keydown="delete errors['no_of_tickets_available']"
 			></text-input>
@@ -62,11 +64,10 @@ export default {
 	data() {
 		return {
 			category: {
-				category_name: "Camping with breakfast Ticket",
-				category_description:
-					'<p><span style="color: rgb(51, 51, 51);">*Minimum no. of bookings required - 2 Nights</span></p><p><span style="color: rgb(51, 51, 51);">*Each ticket permits a single person for one night</span></p><p><span style="color: rgb(51, 51, 51);">Camping with breakfast includes- Daily Breakfast, Tent on sharing, sleeping mat, sleeping bag or blankets.</span></p>',
-				category_price: "1000",
-				no_of_tickets_available: "50"
+				category_name: "",
+				category_description: "",
+				category_price: "",
+				no_of_tickets_available: ""
 			}
 		};
 	},
@@ -82,6 +83,11 @@ export default {
 				EventBus.$emit("ticket_category", {
 					category: this.category
 				});
+
+				this.category.category_name = "";
+				this.category.category_description = "";
+				this.category.category_price = "";
+				this.category.no_of_tickets_available = "";
 			}
 		}
 	}

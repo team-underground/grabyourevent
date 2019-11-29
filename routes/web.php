@@ -29,7 +29,7 @@ Route::get('/contact-us', function () {
 
 // public events
 Route::get('/events', 'EventsController@index')->name('events.index');
-Route::get('/this-month', 'EventsController@index')->name('events.index');
+Route::get('/this-month', 'EventsController@index')->name('events.thismonth.index');
 Route::get('/events/{event_slug}', 'EventsController@show')->name('events.show');
 
 Route::middleware(['auth'])->group(function () {
