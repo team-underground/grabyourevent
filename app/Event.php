@@ -221,6 +221,7 @@ class Event extends BaseModel implements ViewableContract
         $this->tags()->detach();
         // attaching all the tags that is requested
         foreach ($tags as $key => $tag) {
+            $tag = str_replace('"', '', $tag);
             // dd($tag);
             $tagFound = Tag::where('name', 'like', '%' . $tag . '%')->first();
             if ($tagFound) {
