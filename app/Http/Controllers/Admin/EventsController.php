@@ -135,6 +135,9 @@ class EventsController extends Controller
 
     public function update(Event $event, Request $request)
     {
+        // dd(collect($request->meta_keywords)->each(function ($key) {
+        //     return str_replace('"', '', $key);
+        // }));
         $rules = [
             'event_name' => ['required'],
             'event_category' => ['required'],

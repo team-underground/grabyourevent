@@ -539,7 +539,11 @@ export default {
                     }
                     if (Array.isArray(value)) {
                         value.forEach(val => {
-                            formData.append(`${key}[]`, JSON.stringify(val));
+                            if(key == 'event_keywords' || key == 'meta_keywords') {
+                            formData.append(`${key}[]`, val);
+                            }else {
+                                formData.append(`${key}[]`, JSON.stringify(val));
+                            }
                         });
                     } else {
                         formData.append(key, value || "");
