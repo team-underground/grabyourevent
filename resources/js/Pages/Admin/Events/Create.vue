@@ -182,6 +182,26 @@
                         <div class="md:flex -mx-4 mb-10">
                             <div class="md:w-1/3 px-4">
                                 <heading size="large" class="mb-1"
+                                    >Event Ticket</heading
+                                >
+                                <heading class="mb-4"
+                                    >List your event ticket categories</heading
+                                >
+                                <alert
+                                    >If you are having a free listing, provide the ticket price as 0</alert
+                                >
+                            </div>
+                            <div class="md:w-2/3 px-4">
+                                <card> 
+                                    <ticket-index :categories="ticket_categories" class="mb-4"></ticket-index>
+                                    <ticket-create :errors="errors"></ticket-create>
+                                </card>
+                            </div>
+                        </div>
+
+                        <div class="md:flex -mx-4 mb-10">
+                            <div class="md:w-1/3 px-4">
+                                <heading size="large" class="mb-1"
                                     >Event Location</heading
                                 >
                                 <heading class="mb-4"
@@ -313,6 +333,8 @@
 </template>
 
 <script>
+import { EventBus } from '@/EventBus.js';
+
 import Layout from "@/Shared/Layout";
 import Heading from "@/Shared/tuis/Heading";
 import Icon from "@/Shared/tuis/Icon";
@@ -331,6 +353,8 @@ import EmptyState from "@/Shared/tuis/EmptyState";
 import TagsInput from "@/Shared/tuis/TagsInput";
 import TimePicker from "@/Shared/tuis/TimePicker";
 import LocationPicker from "@/Shared/tuis/LocationPicker";
+import TicketCreate from '@/Pages/Admin/Tickets/Create';
+import TicketIndex from '@/Pages/Admin/Tickets/Index';
 
 const date = new Date();
 const day = date.getDate();
@@ -357,7 +381,9 @@ export default {
         EmptyState,
         TagsInput,
         TimePicker,
-        LocationPicker
+        LocationPicker,
+        TicketCreate,
+        TicketIndex
     },
     props: ["errors", "categories"],
     data() {
@@ -408,8 +434,18 @@ export default {
                 event_state: null,
                 latitude: null,
                 longitude: null
-            }
+            },
+            ticket_categories: []
         };
+    },
+
+    mounted() {
+        EventBus.$on('ticket_category', ({category}) => {
+            localStorage.setItem('category', JSON.stringify(category)) 
+            this.ticket_categories.push(JSON.parse(localStorage.getItem('category')))
+            localStorage.removeItem('category')
+        })
+        EventBus.$on('ticket_delete_index', ({index}) => this.ticket_categories.splice(index,1))
     },
     methods: {
         formattedDate(date) {
@@ -430,6 +466,7 @@ export default {
         },
         saveEvent() {
             this.$refs.eventSaveButton.startLoading();
+            Object.assign(this.event, {ticket_categories:this.ticket_categories});
             Object.assign(this.event, {
                 event_starting_date:
                     this.formattedDate(this.event.event_start_date) +
@@ -477,7 +514,7 @@ export default {
 
             let formData = new FormData();
             this.getFormData(formData, formattedEvent);
-
+            
             this.$inertia
                 .post(this.route("admin.events.store"), formData)
                 .then(() => {
@@ -490,7 +527,7 @@ export default {
         getFormData(formData, data, previousKey) {
             if (data instanceof Object) {
                 Object.keys(data).forEach(key => {
-                    const value = data[key];
+                    const value = data[key]; 
                     if (value instanceof Blob) {
                         formData.append(key, value);
                     }
@@ -502,7 +539,7 @@ export default {
                     }
                     if (Array.isArray(value)) {
                         value.forEach(val => {
-                            formData.append(`${key}[]`, val);
+                            formData.append(`${key}[]`, JSON.stringify(val));
                         });
                     } else {
                         formData.append(key, value || "");

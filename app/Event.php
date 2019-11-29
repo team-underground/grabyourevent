@@ -46,7 +46,7 @@ class Event extends BaseModel implements ViewableContract
         parent::boot();
 
         static::creating(function ($model) {
-            $model->event_slug = Str::slug($model->event_name); // change the ToBeSluggiefied
+            $model->event_slug = Str::slug($model->event_name) . '-' . rand(11111111, 9999999); // change the ToBeSluggiefied
 
             $latestSlug =
                 static::whereRaw("event_slug = '$model->event_slug' or event_slug LIKE '$model->event_slug-%'")
@@ -59,6 +59,26 @@ class Event extends BaseModel implements ViewableContract
                 $number = intval(end($pieces));
 
                 $model->event_slug .= '-' . ($number + 1);
+            }
+        });
+
+        static::updating(function ($model) {
+
+            if ($model->event_published_at == null && $model->event_status === EventStatusType::getInstance(EventStatusType::Moderation)->key) {
+                $model->event_slug = Str::slug($model->event_name) . '-' . rand(11111111, 9999999);
+
+                $latestSlug =
+                    static::whereRaw("id != '$model->id' and (event_slug = '$model->event_slug' or event_slug LIKE '$model->event_slug-%')")
+                    ->latest('id')
+                    ->value('event_slug');
+
+                if ($latestSlug) {
+                    $pieces = explode('-', $latestSlug);
+
+                    $number = intval(end($pieces));
+
+                    $model->event_slug .= '-' . ($number + 1);
+                }
             }
         });
     }

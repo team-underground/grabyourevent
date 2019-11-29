@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/events/{event}/update', 'Admin\EventsController@update')->name('admin.events.update');
     Route::post('/admin/events/{uuid}/publish', 'Admin\EventsPublishController@store')->name('admin.events.publish');
     Route::delete('/admin/events/{uuid}/image', 'Admin\EventsController@deleteImage')->name('admin.events.deleteimage');
+
+    // event tickets
+    Route::post('/admin/events/{uuid}/ticket', 'Admin\EventsTicketController@store')->name('admin.events.ticket.store');
 });
 // buy tickets
 // Route::get('/events/{event}/buy', 'TicketBuyController@create')->name('tickets.buy.create');
