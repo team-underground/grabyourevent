@@ -135,9 +135,6 @@ class EventsController extends Controller
 
     public function update(Event $event, Request $request)
     {
-        // dd(collect($request->meta_keywords)->each(function ($key) {
-        //     return str_replace('"', '', $key);
-        // }));
         $rules = [
             'event_name' => ['required'],
             'event_category' => ['required'],
@@ -170,6 +167,7 @@ class EventsController extends Controller
 
             $event->event_name = $request->event_name;
             $event->artist_name = $request->artist_name;
+            $event->is_featured = (int) $request->is_featured;
             $event->event_category = (int) $request->event_category;
             $event->event_description = $request->event_description;
             $event->optional_description = $request->optional_description;

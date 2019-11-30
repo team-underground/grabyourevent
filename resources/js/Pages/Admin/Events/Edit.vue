@@ -132,6 +132,25 @@
                                         :errors="errors['event_name']"
                                         @keydown="delete errors['event_name']"
                                     ></text-input>
+                                    <div class="mb-4">
+                                        <radio-input
+                                            classes="border-2 p-3 rounded-lg"
+                                            label="Event is featured"
+                                            v-model="form.is_featured"
+                                            :options="featureoptions"
+                                            name="organization"
+                                            :stacked="false"
+                                            size="large"
+                                        >
+                                            <template slot-scope="option">
+                                                <div class="flex">
+                                                    <div class="pl-2 w-32">
+                                                        <h5 class="text-gray-700">{{ option.row.label }}</h5>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </radio-input>
+                                    </div>
                                     <div class="flex -mx-4 mb-4">
                                         <date-input
                                             label="Event Start Date"
@@ -405,6 +424,7 @@ import TagsInput from "@/Shared/tuis/TagsInput";
 import TimePicker from "@/Shared/tuis/TimePicker";
 import LocationPicker from "@/Shared/tuis/LocationPicker";
 import Badge from "@/Shared/tuis/Badge";
+import RadioInput from "@/Shared/tuis/RadioInput";
 
 const date = new Date();
 const day = date.getDate();
@@ -432,11 +452,22 @@ export default {
         TagsInput,
         TimePicker,
         LocationPicker,
-        Badge
+        Badge,
+        RadioInput
     },
     props: ["errors", "categories", "event", "can"],
     data() {
         return {
+            featureoptions: [
+                {
+                    "label": 'No',
+                    "value" : "0"
+                },
+                {
+                    "label": 'Yes',
+                    "value" : "1"
+                }
+            ],
             location: {
                 lat: parseFloat(this.event.latitude),
                 lng: parseFloat(this.event.longitude)
@@ -456,6 +487,7 @@ export default {
                 }
             },
             form: {
+                is_featured: this.event.is_featured.toString(),
                 event_image: null,
                 event_image_deleted:
                     this.event.event_image == null ? "yes" : "no",
