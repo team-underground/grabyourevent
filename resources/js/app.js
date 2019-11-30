@@ -64,6 +64,11 @@ Unicon.add([
     uniMapMarker
 ]);
 
+import VueGlide from "vue-glide-js";
+import "vue-glide-js/dist/vue-glide.css";
+
+Vue.use(VueGlide);
+
 Vue.mixin({ methods: { route: window.route } });
 Vue.use(Unicon);
 Vue.use(SocialSharing);

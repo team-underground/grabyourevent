@@ -1,23 +1,63 @@
 <template>
     <layout>
+        <vue-glide
+            class="mx-4 my-4 md:hidden"
+            :perView="1"
+            :gap="20"
+            :peek="{ before: 0, after: 80 }"
+        >
+            <vue-glide-slide v-for="i in 3" :key="i">
+                <event-mobile-card
+                    :event="advertised[i]"
+                    class="w-2/3 mb-0"
+                ></event-mobile-card>
+            </vue-glide-slide>
+        </vue-glide>
+
+        <!-- <div
+            class="py-4 px-2 md:hidden"
+            v-dragscroll
+            style="white-space: nowrap; overflow-x: hidden; overflow-y: hidden;"
+        >
+            <div class="inline-block px-2" style="width: 280px">
+                <event-card
+                    :event="advertised[0]"
+                    color="bg-orange-100"
+                    class="inline-block"
+                ></event-card>
+            </div>
+            <div class="inline-block px-2" style="width: 280px">
+                <event-card
+                    :event="advertised[0]"
+                    color="bg-orange-100"
+                ></event-card>
+            </div>
+        </div> -->
+
         <event-advertise-card
+            class="hidden md:block"
             :event="advertised[0]"
             color="bg-orange-100"
         ></event-advertise-card>
 
         <!-- featured events -->
-        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100" v-if="featured.length > 0">
+        <div
+            class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100"
+            v-if="featured.length > 0"
+        >
             <div class="container mx-auto">
                 <div class="flex justify-between mb-6">
                     <heading size="heading" class="text-center"
                         >Featured Events</heading
                     >
 
-                    <link-to :to="route('events.index')" tag="inertia-link">View all</link-to>
+                    <link-to :to="route('events.index')" tag="inertia-link"
+                        >View all</link-to
+                    >
                 </div>
-                <div class="md:flex md:flex-wrap md:flex-1 -mx-4 mb-10">
+                <div class="flex flex-wrap md:flex-1 -mx-4 mb-10">
                     <div
-                        class="md:w-1/4 px-4"
+                        class="w-1/2 md:w-1/4 px-4"
                         v-for="(event, idx2) in featured"
                         :key="idx2"
                     >
@@ -31,15 +71,17 @@
         <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
             <div class="container mx-auto">
                 <div class="flex justify-between mb-6">
-                    <heading size="heading" class="text-center"
+                    <heading size="heading" tag="h2" class="text-center"
                         >Upcoming Events</heading
                     >
 
-                    <link-to :to="route('events.index')" tag="inertia-link">View all</link-to>
+                    <link-to :to="route('events.index')" tag="inertia-link"
+                        >View all</link-to
+                    >
                 </div>
                 <div class="md:flex md:flex-wrap md:flex-1 -mx-4 mb-10">
                     <div
-                        class="md:w-1/4 px-4"
+                        class="w-1/2 md:w-1/4 px-4"
                         v-for="(event, idx2) in upcoming"
                         :key="idx2"
                     >
@@ -61,7 +103,7 @@
                     style="white-space: nowrap; overflow-x: hidden; overflow-y: hidden;"
                 >
                     <div
-                        class="inline-block px-4"
+                        class="inline-block px-2"
                         v-for="(category, idx) in categories"
                         :key="idx"
                         style="width: 224px"
@@ -69,10 +111,9 @@
                         <div
                             class="shadow-md bg-orange-100 rounded-lg h-64 w-full items-center relative"
                         >
-                            <div
+                            <!-- <div
                                 class="h-12 w-12 flex items-center justify-center rounded-full text-orange-600 absolute left-0 top-0 m-4 shadow-md"
-                                style="background-color: rgba(255,255,255, 0.75)"
-                            >
+                                style="background-color: rgba(255,255,255, 0.75)">
                                 <unicon
                                     v-if="category.category_name == 'Learning'"
                                     name="book-open"
@@ -165,7 +206,7 @@
                                     width="32"
                                     height="32"
                                 ></unicon>
-                            </div>
+                            </div> -->
 
                             <img
                                 v-if="category.category_name == 'Learning'"
@@ -330,6 +371,8 @@
 </template>
 
 <script>
+import { Glide, GlideSlide } from "vue-glide-js";
+
 import Layout from "@/Shared/Layout";
 import Heading from "@/Shared/tuis/Heading";
 import Card from "@/Shared/tuis/Card";
@@ -339,6 +382,7 @@ import LoadingButton from "@/Shared/tuis/LoadingButton";
 import MediaObject from "@/Shared/tuis/MediaObject";
 import EventCard from "./Front/Events/Card";
 import EventAdvertiseCard from "./Front/Events/AdvertiseCard";
+import EventMobileCard from "./Front/Events/MobileCard";
 import SubscriptionForm from "./Front/Subscription";
 
 import { dragscroll } from "vue-dragscroll";
@@ -354,7 +398,11 @@ export default {
         MediaObject,
         EventCard,
         EventAdvertiseCard,
-        SubscriptionForm
+        SubscriptionForm,
+        EventMobileCard,
+
+        [Glide.name]: Glide,
+        [GlideSlide.name]: GlideSlide
     },
 
     props: {
