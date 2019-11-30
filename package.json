@@ -42,6 +42,7 @@
         "vue-unicons": "^1.4.1",
         "vue2-google-maps": "^0.10.7",
         "vue2-location-picker": "^1.2.0",
-        "vue2-timepicker": "^1.0.4"
+        "vue2-timepicker": "^1.0.4",
+        "vue-sweetalert2": "^2.1.5"
     }
 }

@@ -2,6 +2,7 @@ import { InertiaApp } from "@inertiajs/inertia-vue";
 import Vue from "vue";
 import Unicon from "vue-unicons";
 import SocialSharing from "vue-social-sharing";
+import VueSweetalert2 from "vue-sweetalert2";
 import {
     uniConstructor,
     uniCarWash,
@@ -76,6 +77,13 @@ import VueGlide from "vue-glide-js";
 import "vue-glide-js/dist/vue-glide.css";
 
 Vue.use(VueGlide);
+const options = {
+    confirmButtonColor: "#20859f",
+    cancelButtonColor: "#ff7674",
+    showCloseButton: true
+};
+import "sweetalert2/dist/sweetalert2.min.css";
+Vue.use(VueSweetalert2, options);
 
 Vue.mixin({ methods: { route: window.route } });
 Vue.use(Unicon);

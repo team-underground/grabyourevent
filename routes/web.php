@@ -15,7 +15,7 @@ use Artesaos\SEOTools\Facades\JsonLd;
 |
 */
 
-Route::get('/', 'WelcomeController');
+Route::get('/', 'WelcomeController')->name('welcome');
 
 Route::get('/about', function () {
     SEOMeta::setTitle('About Grab Your Event');
@@ -110,3 +110,15 @@ Route::get('/register', function () {
 });
 
 Route::post('/contact/query', 'ContactsController')->name('contacts.query');
+
+
+// Subscriber 
+Route::post('/subscriber-plan/create', 'SubscriberController@createSubscriptionPlane');
+Route::post('/subscriber', 'SubscriberController@store');
+Route::get('/subscriber/cancel', 'SubscriberController@cancelSubscription');
+Route::get('/subscriber/cancel-page', function () {
+    if (session()->has('success')) {
+        return  Inertia::render('Unsubscribe');
+    }
+    return redirect()->route('welcome');
+});

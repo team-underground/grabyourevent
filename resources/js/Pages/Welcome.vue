@@ -333,7 +333,7 @@
 			<div class="-mb-2 absolute right-0 mr-32 bottom-0 w-5 h-5 rounded-full bg-orange-300 block"></div>
 		</div>
 
-		<subscription-form></subscription-form>
+		<subscription-form :errors="errors"></subscription-form>
 	</layout>
 </template>
 
@@ -376,7 +376,8 @@ export default {
 		categories: Array,
 		featured: Array,
 		upcoming: Array,
-		advertised: Array
+		advertised: Array,
+		errors: Object
 	},
 
 	data() {
