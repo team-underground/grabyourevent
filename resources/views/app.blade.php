@@ -20,6 +20,18 @@
     @if(\Request::is('checkout'))
     <script async defer src="https://checkout.razorpay.com/v1/checkout.js"></script>
     @endif
+    
+    @if(env('APP_ENV') == 'production' )
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151880965-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-151880965-2');
+    </script>
+    @endif
     @routes
 </head>
 
