@@ -1,9 +1,9 @@
 <template>
     <layout>
         <!-- featured events -->
-        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
+        <div class="px-4 lg:px-6 pt-8 md:pt-16 pb-10 bg-gray-100">
             <div class="container mx-auto">
-                <div class="flex flex-col justify-center mb-16">
+                <div class="flex flex-col justify-center mb-6 md:mb-10">
                     <heading size="heading" class="text-center"
                         >Events around North East</heading
                     >
@@ -11,20 +11,20 @@
                         >({{ events_count }} found)</heading
                     >
                 </div>
-                <div class="flex flex-wrap flex-col -mx-4 mb-10">
-                    <div class="md:flex md:flex-wrap md:flex-1">
-                        <div
-                            class="flex flex-wrap md:w-1/4 px-4 mb-8"
-                            v-for="(event, idx2) in events.data"
-                            :key="idx2"
-                        >
-                            <event-card :event="event"></event-card>
-                        </div>
-                    </div>
-                    <div class="px-4">
-                        <pagination :links="events.links" />
+                <!-- <div class="flex flex-wrap flex-col md: -mx-4 mb-10"> -->
+                <div class="flex flex-wrap md:flex-1 -mx-2 md:-mx-4 md:mb-10">
+                    <div
+                        class="flex flex-wrap w-1/2 md:w-1/4 px-2 md:px-4 mb-2 md:mb-8"
+                        v-for="(event, idx2) in events.data"
+                        :key="idx2"
+                    >
+                        <event-card :event="event"></event-card>
                     </div>
                 </div>
+                <div class="px-4">
+                    <pagination :links="events.links" />
+                </div>
+                <!-- </div> -->
             </div>
         </div>
     </layout>

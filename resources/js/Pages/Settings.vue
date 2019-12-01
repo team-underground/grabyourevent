@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="md:flex md:flex-wrap mb-10 -mx-4">
+                <!-- <div class="md:flex md:flex-wrap mb-10 -mx-4">
                     <div class="md:w-1/3 px-4">
                         <heading size="heading" class="mb-1"
                             >Notifications</heading
@@ -128,7 +128,7 @@
                             </template>
                         </card>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </layout>

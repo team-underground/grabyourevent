@@ -30,7 +30,11 @@ import {
     uniBell,
     uniMoneyStack,
     uniBoltAlt,
-    uniMapMarker
+    uniMapMarker,
+    uniHomeAlt,
+    uniUser,
+    uniCog,
+    uniDashboard
 } from "vue-unicons/src/icons";
 
 Unicon.add([
@@ -61,7 +65,11 @@ Unicon.add([
     uniBell,
     uniMoneyStack,
     uniBoltAlt,
-    uniMapMarker
+    uniMapMarker,
+    uniHomeAlt,
+    uniUser,
+    uniCog,
+    uniDashboard
 ]);
 
 import VueGlide from "vue-glide-js";

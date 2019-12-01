@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="py-10">
+        <div class="py-10 px-4">
             <div class="max-w-6xl mx-auto">
                 <div class="md:flex -mx-4">
                     <div class="px-4">
@@ -145,7 +145,13 @@
                                             <template slot-scope="option">
                                                 <div class="flex">
                                                     <div class="pl-2 w-32">
-                                                        <h5 class="text-gray-700">{{ option.row.label }}</h5>
+                                                        <h5
+                                                            class="text-gray-700"
+                                                        >
+                                                            {{
+                                                                option.row.label
+                                                            }}
+                                                        </h5>
                                                     </div>
                                                 </div>
                                             </template>
@@ -460,12 +466,12 @@ export default {
         return {
             featureoptions: [
                 {
-                    "label": 'No',
-                    "value" : "0"
+                    label: "No",
+                    value: "0"
                 },
                 {
-                    "label": 'Yes',
-                    "value" : "1"
+                    label: "Yes",
+                    value: "1"
                 }
             ],
             location: {

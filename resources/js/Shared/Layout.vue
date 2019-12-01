@@ -8,13 +8,13 @@
                             <img
                                 src="/gye-logo.svg"
                                 alt="gye"
-                                width="48"
+                                width="44"
                                 class="hidden md:block"
                             />
                             <img
                                 src="/gye-logo.svg"
                                 alt="gye"
-                                width="40"
+                                width="38"
                                 class="md:hidden"
                             />
 
@@ -24,21 +24,27 @@
                         </div>
                     </inertia-link>
 
-                    <div
-                        class="inline-block inline-flex items-center justify-center w-8 h-8 rounded-full mr-2 cursor-pointer md:hidden"
-                        @click="showNavbar = !showNavbar"
-                    >
-                        <svg
-                            class="fill-current text-gray-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="30"
-                            height="30"
-                            viewBox="0 0 24 24"
+                    <div class="md:hidden">
+                        <inertia-link
+                            v-if="$page.auth.user"
+                            href="/dashboard"
+                            class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center text-gray-500"
                         >
-                            <path
-                                d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"
-                            />
-                        </svg>
+                            <unicon
+                                name="user"
+                                class="fill-current mx-auto"
+                                fill="currentColor"
+                                width="24"
+                                height="24"
+                            ></unicon>
+                        </inertia-link>
+
+                        <inertia-link
+                            v-if="!$page.auth.user"
+                            href="/login"
+                            class="text-sm px-4 py-5 inline-block font-medium text-gray-600 hover:text-orange-600"
+                            >Login / Signup</inertia-link
+                        >
                     </div>
                 </div>
 
@@ -164,47 +170,108 @@
                         >
                     </template>
                 </div>
-
-                <!-- <div class="hidden md:block">
-					<inertia-link
-						href="/login"
-						class="px-4 py-5 mr-3 inline-block font-medium text-gray-600 hover:text-orange-600"
-					>Log in</inertia-link>
-					<loading-button tag="a" to="/register" variant="warning" size="small">Sign up</loading-button>
-				</div>-->
             </div>
 
-            <div class="md:hidden" v-if="showNavbar">
-                <a
+            <div class="md:hidden flex justify-between">
+                <inertia-link
+                    href="/"
+                    :class="
+                        isUrl('')
+                            ? 'text-orange-600 menu-active-2'
+                            : 'text-gray-500'
+                    "
+                    class="px-4 py-2 truncate inline-block font-medium text-xs hover:text-orange-600"
+                >
+                    <unicon
+                        name="home-alt"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block leading-none mt-2">Home</span>
+                </inertia-link>
+                <inertia-link
+                    href="/events"
+                    :class="
+                        isUrl('events')
+                            ? 'text-orange-600 menu-active-2'
+                            : 'text-gray-500'
+                    "
+                    class="px-4 py-2 truncate inline-block font-medium text-xs text-center hover:text-orange-600"
+                >
+                    <unicon
+                        name="location-point"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block leading-none mt-2">Events</span>
+                </inertia-link>
+                <inertia-link
+                    href="/this-month"
+                    :class="
+                        isUrl('this-month')
+                            ? 'text-orange-600 menu-active-2'
+                            : 'text-gray-500'
+                    "
+                    class="px-4 py-2 truncate inline-block font-medium text-xs hover:text-orange-600"
+                >
+                    <unicon
+                        name="fire"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block leading-none mt-2">This Month</span>
+                </inertia-link>
+                <!-- <inertia-link
                     href="#"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Home</a
+                    class="px-4 py-2 truncate inline-block font-medium text-xs text-gray-500 hover:text-orange-600"
                 >
-                <a
+                    <unicon
+                        name="user"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block leading-none mt-2">Account</span>
+                </inertia-link> -->
+                <inertia-link
                     href="#"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Search</a
+                    class="px-4 py-2 truncate inline-block font-medium text-xs text-gray-500 hover:text-orange-600"
                 >
-                <a
-                    href="#"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Schedule</a
+                    <unicon
+                        name="ticket"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block leading-none mt-2">Tickets</span>
+                </inertia-link>
+                <!-- <inertia-link
+                    v-if="$page.auth.user"
+                    href="/dashboard"
+                    :class="
+                        isUrl('dashboard')
+                            ? 'text-orange-600 menu-active-2'
+                            : 'text-gray-500'
+                    "
+                    class="py-2 truncate inline-block font-medium text-xs hover:text-orange-600"
                 >
-                <a
-                    href="#"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Events</a
-                >
-                <a
-                    href="/register"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Sign up</a
-                >
-                <a
-                    href="/login"
-                    class="border-t px-2 py-3 block font-medium text-gray-600 hover:text-blue-500"
-                    >Login</a
-                >
+                    <unicon
+                        name="dashboard"
+                        class="fill-current mx-auto"
+                        fill="currentColor"
+                        width="24"
+                        height="24"
+                    ></unicon>
+                    <span class="block mt-2 leading-none">Dashboard</span>
+                </inertia-link> -->
             </div>
         </div>
 

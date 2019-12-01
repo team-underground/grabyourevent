@@ -14,7 +14,7 @@
         </div>
         <div class="p-4">
             <span
-                class="hidden md:block bg-orange-200 text-orange-600 rounded-full text-sm inline-block uppercase px-2 tracking-wide font-semibold mb-3"
+                class="hidden md:inline-block bg-orange-200 text-orange-600 rounded-full text-xs inline-block uppercase px-2 tracking-wide font-semibold mb-3"
                 >{{ event.event_category }}</span
             >
 
@@ -29,17 +29,16 @@
                     <heading size="small-caps">{{ event.event_month }}</heading>
                 </div>
                 <div
-                    class="-mt-12 md:hidden absolute left-0 top-0 w-16 h-16 inline-flex items-center justify-center text-center text-white bg-white rounded-full rounded-bl-none"
+                    class="-mt-10 md:hidden absolute left-0 top-0 w-12 h-12 inline-flex items-center justify-center text-center text-white bg-white rounded-full"
                 >
                     <div>
-                        <heading
-                            size="heading"
-                            tag="h3"
-                            class="tracking-wide leading-tight"
-                        >
+                        <heading size="large" tag="h3" class="tracking-wide">
                             {{ event.event_date }}
                         </heading>
-                        <heading size="small-caps" class="text-orange-600">
+                        <heading
+                            size="small-caps"
+                            class="text-orange-600 -mt-2"
+                        >
                             {{ event.event_month }}
                         </heading>
                     </div>

@@ -8,10 +8,21 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Resources\EventResource;
 
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\JsonLd;
+
 class WelcomeController extends Controller
 {
     public function __invoke()
     {
+        SEOMeta::setTitle('Home');
+        SEOMeta::setCanonical(url('/'));
+
+        OpenGraph::setTitle('Home');
+        OpenGraph::setUrl(url('/'));
+        OpenGraph::addProperty('type', 'articles');
+
         // TODO advertised to be selected from is_advertised field
         $advertised = Event::featured(1)->published()->closed(false)->inRandomOrder()->limit(4)->get();
 

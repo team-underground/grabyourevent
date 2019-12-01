@@ -1,7 +1,7 @@
 <template>
     <layout>
         <vue-glide
-            class="mx-4 my-4 md:hidden"
+            class="px-4 py-4 md:hidden"
             :perView="1"
             :gap="20"
             :peek="{ before: 0, after: 80 }"
@@ -42,7 +42,7 @@
 
         <!-- featured events -->
         <div
-            class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100"
+            class="px-4 lg:px-6 md:pt-16 md:pb-10 bg-gray-100"
             v-if="featured.length > 0"
         >
             <div class="container mx-auto">
@@ -55,9 +55,9 @@
                         >View all</link-to
                     >
                 </div>
-                <div class="flex flex-wrap md:flex-1 -mx-4 mb-10">
+                <div class="flex flex-wrap md:flex-1 -mx-2 md:-mx-4 mb-10">
                     <div
-                        class="w-1/2 md:w-1/4 px-4"
+                        class="w-1/2 md:w-1/4 px-2 md:px-4"
                         v-for="(event, idx2) in featured"
                         :key="idx2"
                     >
@@ -68,7 +68,7 @@
         </div>
 
         <!-- upcoming events -->
-        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100">
+        <div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100 hidden md:block">
             <div class="container mx-auto">
                 <div class="flex justify-between mb-6">
                     <heading size="heading" tag="h2" class="text-center"
@@ -91,25 +91,49 @@
             </div>
         </div>
 
-        <event-advertise-card :event="advertised[1]"></event-advertise-card>
-
+        <div class="hidden md:block">
+            <event-advertise-card :event="advertised[1]"></event-advertise-card>
+        </div>
         <div class="px-4 lg:px-6 py-8 md:py-20 bg-white">
             <div class="container mx-auto">
-                <heading size="heading" class="mb-10 text-center"
-                    >Event Categories</heading
+                <heading
+                    size="heading"
+                    class="mb-6 md:mb-10 text-left md:text-center"
+                    >Browse by Categories</heading
                 >
-                <div
+                <!-- <div
                     v-dragscroll
                     style="white-space: nowrap; overflow-x: hidden; overflow-y: hidden;"
+                > -->
+
+                <vue-glide
+                    :perView="6"
+                    :gap="20"
+                    :peek="{ before: 0, after: 80 }"
+                    :breakpoints="{
+                        1024: {
+                            perView: 4
+                        },
+                        800: {
+                            perView: 3
+                        },
+                        576: {
+                            perView: 2
+                        }
+                    }"
                 >
-                    <div
+                    <vue-glide-slide
+                        v-for="(category, idx) in categories"
+                        :key="idx"
+                    >
+                        <!-- <div
                         class="inline-block px-2"
                         v-for="(category, idx) in categories"
                         :key="idx"
                         style="width: 224px"
-                    >
+                    > -->
                         <div
-                            class="shadow-md bg-orange-100 rounded-lg h-64 w-full items-center relative"
+                            class="overflow-hidden shadow-md bg-orange-100 rounded-lg h-64 w-full items-center relative overlay-black"
                         >
                             <!-- <div
                                 class="h-12 w-12 flex items-center justify-center rounded-full text-orange-600 absolute left-0 top-0 m-4 shadow-md"
@@ -294,12 +318,12 @@
                                 class="object-cover h-64 w-full block rounded-lg"
                             />
 
+                            <!-- style="background-color: rgba(255,255,255, 0.95)" -->
                             <div
-                                class="absolute left-0 right-0 bottom-0 mx-4 mb-4 rounded-lg px-4 py-3"
-                                style="background-color: rgba(255,255,255, 0.95)"
+                                class="z-10 absolute left-0 right-0 bottom-0 mx-4 rounded-lg py-4"
                             >
                                 <span
-                                    class="block truncate text-center text-gray-700 font-sans font-bold leading-tight"
+                                    class="block truncate text-center text-gray-100 font-sans font-bold leading-tight"
                                     >{{ category.category_name }}</span
                                 >
                                 <span
@@ -308,8 +332,9 @@
                                 >
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <!-- </div> -->
+                    </vue-glide-slide>
+                </vue-glide>
             </div>
         </div>
 
@@ -338,7 +363,7 @@
                             <heading
                                 size="small-caps"
                                 class="text-orange-500 md:ml-10"
-                                >Quote of the day</heading
+                                >Quote</heading
                             >
                             <div class="h-1 bg-orange-200 flex-1 ml-5"></div>
                         </div>
