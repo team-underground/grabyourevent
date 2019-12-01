@@ -4,7 +4,7 @@
             <div
                 v-if="link.url === null"
                 :key="key"
-                class="mr-1 mb-1 px-4 py-3 text-sm border rounded text-grey"
+                class="mr-1 mb-1 px-4 py-3 text-sm border rounded-lg text-grey"
                 :class="{ 'ml-auto': link.label === 'Next' }"
             >
                 {{ link.label }}
@@ -12,7 +12,7 @@
             <inertia-link
                 v-else
                 :key="key"
-                class="mr-1 mb-1 px-4 py-3 text-sm border rounded hover:bg-white focus:border-indigo focus:text-indigo"
+                class="mr-1 mb-1 px-4 py-3 text-sm border rounded-lg hover:bg-white focus:border-indigo focus:text-indigo"
                 :class="{
                     'bg-white': link.active,
                     'ml-auto': link.label === 'Next'

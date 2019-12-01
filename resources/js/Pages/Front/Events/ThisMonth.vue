@@ -10,17 +10,15 @@
 				<div class="flex flex-wrap flex-col -mx-4 md:mb-10">
 					<div class="md:flex md:flex-wrap md:flex-1">
 						<div
-							class="flex flex-wrap md:w-1/4 px-4 mb-2 md:mb-8"
+							class="flex flex-wrap w-1/2 md:w-1/4 px-4 mb-2 md:mb-8"
 							v-for="(event, idx2) in events.data"
 							:key="idx2"
 						>
 							<event-card :event="event"></event-card>
 						</div>
 					</div>
-					<div class="px-4">
-						<pagination :links="events.links" />
-					</div>
 				</div>
+				<pagination :links="events.links" />
 			</div>
 		</div>
 	</layout>

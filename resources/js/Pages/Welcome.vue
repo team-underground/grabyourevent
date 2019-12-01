@@ -29,15 +29,15 @@
 		<event-advertise-card class="hidden md:block" :event="advertised[0]" color="bg-orange-100"></event-advertise-card>
 
 		<!-- featured events -->
-		<div class="px-4 lg:px-6 md:pt-16 md:pb-10 bg-gray-100" v-if="featured.length > 0">
+		<div class="px-4 lg:px-6 md:pt-10 pb-10 bg-gray-100" v-if="featured.length > 0">
 			<div class="container mx-auto">
 				<div class="flex justify-between mb-6">
 					<heading size="heading" class="text-center">Featured Events</heading>
 
 					<link-to :to="route('events.index')" tag="inertia-link">View all</link-to>
 				</div>
-				<div class="flex flex-wrap md:flex-1 -mx-2 md:-mx-4 mb-10">
-					<div class="w-1/2 md:w-1/4 px-2 md:px-4" v-for="(event, idx2) in featured" :key="idx2">
+				<div class="flex flex-wrap md:flex-1 -mx-2 md:-mx-4">
+					<div class="w-1/2 md:w-1/4 px-2 md:px-4 mb-2" v-for="(event, idx2) in featured" :key="idx2">
 						<event-card :event="event"></event-card>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 		</div>
 
 		<!-- upcoming events -->
-		<div class="px-4 lg:px-6 pt-16 pb-10 bg-gray-100 hidden md:block">
+		<div class="px-4 lg:px-6 pt-10 pb-10 bg-gray-100 hidden md:block">
 			<div class="container mx-auto">
 				<div class="flex justify-between mb-6">
 					<heading size="heading" tag="h2" class="text-center">Upcoming Events</heading>
