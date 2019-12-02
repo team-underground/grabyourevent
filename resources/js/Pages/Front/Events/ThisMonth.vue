@@ -7,12 +7,8 @@
 					<heading size="heading" class="text-center">Events this month around North East</heading>
 					<heading class="text-center italic" size="small">({{ events_count }} found)</heading>
 				</div>
-				<div class="-mx-4 md:mb-10">
-					<div
-						class="flex flex-wrap w-1/2 md:w-1/4 px-4 mb-2 md:mb-8"
-						v-for="(event, idx2) in events.data"
-						:key="idx2"
-					>
+				<div class="flex flex-wrap -mx-4 md:mb-10">
+					<div class="w-1/2 md:w-1/4 px-4 mb-2 md:mb-8" v-for="(event, idx2) in events.data" :key="idx2">
 						<event-card :event="event"></event-card>
 					</div>
 				</div>
