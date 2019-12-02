@@ -5,7 +5,7 @@
 				<div class="flex items-center overflow-hidden">
 					<div class="w-2/3">
 						<heading size="small-caps" class="mb-1 text-orange-500">Get my</heading>
-						<heading size="display" class="mb-4">Tickets</heading>
+						<heading size="display" class="mb-4" tag="h1">Tickets</heading>
 					</div>
 					<div class="w-1/3 border-b-2 border-orange-200 relative">
 						<div

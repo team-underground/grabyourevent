@@ -1,6 +1,9 @@
 <?php
 
 use Inertia\Inertia;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\JsonLd;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +18,27 @@ use Inertia\Inertia;
 Route::get('/', 'WelcomeController');
 
 Route::get('/about', function () {
+    SEOMeta::setTitle('About');
+    SEOMeta::setCanonical(url('/about'));
+
     return Inertia::render('About');
 });
 Route::get('/terms-of-services', function () {
+    SEOMeta::setTitle('Terms of Services');
+    SEOMeta::setCanonical(url('/terms-of-services'));
+
     return Inertia::render('Terms');
 });
 Route::get('/privacy-policy', function () {
+    SEOMeta::setTitle('Privacy Policy');
+    SEOMeta::setCanonical(url('/privacy-policy'));
+
     return Inertia::render('Privacy');
 });
 Route::get('/contact-us', function () {
+    SEOMeta::setTitle('Contact us');
+    SEOMeta::setCanonical(url('/contact-us'));
+
     return Inertia::render('Contact');
 });
 

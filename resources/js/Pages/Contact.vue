@@ -5,7 +5,8 @@
 				<div class="flex items-center overflow-hidden">
 					<div class="w-2/3">
 						<!-- <heading size="small-caps" class="mb-1 text-orange-500">Grab Your Event</heading>
-						 --><heading size="display" class="mb-4">Contact Us</heading>
+						-->
+						<heading size="display" class="mb-4" tag="h1">Contact Us</heading>
 					</div>
 					<div class="w-1/3 border-b-2 border-orange-200 relative">
 						<div
@@ -25,63 +26,60 @@
 
 		<div class="py-10 px-4">
 			<div class="max-w-5xl mx-auto">
-
-
 				<div class="flex flex-wrap -mx-4 mb-10">
-
 					<div class="w-full md:w-1/2 px-4">
 						<flash-message class="w-full"></flash-message>
 						<text-input
-                            placeholder="Enter your name"
-                            class="w-full mb-3"
-                            label="Name"
-                            v-model="query.name"
+							placeholder="Enter your name"
+							class="w-full mb-3"
+							label="Name"
+							v-model="query.name"
 							:errors="errors['name']"
 							@keydown="delete errors['name']"
-                        ></text-input>
-                        <text-input
-                            placeholder="Enter your E-mail address"
-                            label="E-mail"
-                            class="w-full mb-3"
-                            v-model="query.email"
+						></text-input>
+						<text-input
+							placeholder="Enter your E-mail address"
+							label="E-mail"
+							class="w-full mb-3"
+							v-model="query.email"
 							:errors="errors['email']"
 							@keydown="delete errors['email']"
-                        ></text-input>
-                        <text-input
-                            placeholder="Enter your Contact Number"
-                            label="Phone"
-                            v-model="query.phone"
+						></text-input>
+						<text-input
+							placeholder="Enter your Contact Number"
+							label="Phone"
+							v-model="query.phone"
 							:errors="errors['phone']"
 							@keydown="delete errors['phone']"
-                            class="w-full mb-3"
-                        ></text-input>
-                        <textarea-input
-                            placeholder="Enter details"
-                            label="Description"
-                            class="w-full mb-6"
-                            v-model="query.description"
+							class="w-full mb-3"
+						></text-input>
+						<textarea-input
+							placeholder="Enter details"
+							label="Description"
+							class="w-full mb-6"
+							v-model="query.description"
 							:errors="errors['description']"
 							@keydown="delete errors['description']"
-                        ></textarea-input>
-                        <div class="mb-4">
-						<vue-recaptcha
-							:sitekey="sitekey"
-							:loadRecaptchaScript="true"
-							ref="recaptcha"
-							@verify="onVerify"
-							@expired="onExpired"
-						></vue-recaptcha>
-						<div
-							v-if="!verified"
-							class="text-gray-600 mt-1 text-sm"
-						>Before sending query, please verify that you are a human</div>
-					</div>
-                        <loading-button
-                            variant="warning"
-                            ref="contactRequestButton"
-                            class="md:mt-0 w-full md:w-auto"
-                            @click="saveContactRequest"
-                        >Send Query</loading-button>
+						></textarea-input>
+						<div class="mb-4">
+							<vue-recaptcha
+								:sitekey="sitekey"
+								:loadRecaptchaScript="true"
+								ref="recaptcha"
+								@verify="onVerify"
+								@expired="onExpired"
+							></vue-recaptcha>
+							<div
+								v-if="!verified"
+								class="text-gray-600 mt-1 text-sm"
+							>Before sending query, please verify that you are a human</div>
+						</div>
+						<loading-button
+							variant="warning"
+							ref="contactRequestButton"
+							class="md:mt-0 w-full md:w-auto"
+							@click="saveContactRequest"
+						>Send Query</loading-button>
 					</div>
 
 					<div class="w-full mt-10 md:mt-0 md:w-1/2 px-4">
@@ -92,12 +90,13 @@
 						</div>
 						<heading size="heading" class="mb-2">Grab Your Event</heading>
 						<heading>House No. 59, Ratnapeeth, MG Road Uzan Bazar, Guwahati Assam 781001</heading>
-						<heading class="my-2">Email: <mail-to to="hello@grabyourevent.com">hello@grabyourevent.com</mail-to></heading>
+						<heading class="my-2">
+							Email:
+							<mail-to to="hello@grabyourevent.com">hello@grabyourevent.com</mail-to>
+						</heading>
 
 						<div id="map-contact" class="mt-6 h-64 rounded-lg"></div>
-						
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -116,7 +115,6 @@ import TextareaInput from "@/Shared/tuis/TextareaInput";
 import FlashMessage from "@/Shared/tuis/FlashMessage";
 import VueRecaptcha from "vue-recaptcha";
 
-
 export default {
 	props: ["errors"],
 	components: {
@@ -132,44 +130,44 @@ export default {
 		VueRecaptcha
 	},
 	data() {
-        return {
-        	verified: false,
+		return {
+			verified: false,
 			query: {},
 			sitekey: "6Lfy1sQUAAAAAPJMZX3gT7NZGe4O64ThSsjVdKrE",
-            options: {
-                map: {}
-            },
-            map: null,
-            marker: null
-        };
-    },
+			options: {
+				map: {}
+			},
+			map: null,
+			marker: null
+		};
+	},
 	mounted() {
-        this.map = new google.maps.Map(
-            document.getElementById("map-contact"),
-            Object.assign(
-                {
-                    center: {
-                        lat: parseFloat(26.192779),
-                        lng: parseFloat(91.7506512)
-                    },
-                    zoom: 10
-                },
-                this.options.map
-            )
-        );
-        this.marker = new google.maps.Marker(
-            Object.assign(
-                {
-                    map: this.map,
-                    position: this.map.getCenter(),
-                    draggable: false
-                },
-                this.options.marker
-            )
-        );
-    },
-    methods: {
-    	onVerify: function(response) {
+		this.map = new google.maps.Map(
+			document.getElementById("map-contact"),
+			Object.assign(
+				{
+					center: {
+						lat: parseFloat(26.192779),
+						lng: parseFloat(91.7506512)
+					},
+					zoom: 10
+				},
+				this.options.map
+			)
+		);
+		this.marker = new google.maps.Marker(
+			Object.assign(
+				{
+					map: this.map,
+					position: this.map.getCenter(),
+					draggable: false
+				},
+				this.options.marker
+			)
+		);
+	},
+	methods: {
+		onVerify: function(response) {
 			this.verified = true;
 		},
 		onExpired: function() {

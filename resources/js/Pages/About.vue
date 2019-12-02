@@ -5,7 +5,7 @@
 				<div class="flex items-center overflow-hidden">
 					<div class="w-2/3">
 						<!-- <heading size="small-caps" class="mb-1 text-orange-500">All About</heading> -->
-						<heading size="display" class="mb-4">About Grab Your Event</heading>
+						<heading size="display" class="mb-4" tag="h1">About Grab Your Event</heading>
 					</div>
 					<div class="w-1/3 border-b-2 border-orange-200 relative">
 						<div
@@ -41,7 +41,6 @@
 							<unicon name="ticket" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Buy Tickets</heading>
-						
 					</div>
 
 					<div class="w-1/3 px-4">
@@ -51,7 +50,6 @@
 							<unicon name="money-stack" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Sell Tickets</heading>
-						
 					</div>
 
 					<div class="w-1/3 px-4">
@@ -61,7 +59,6 @@
 							<unicon name="bolt-alt" fill="currentColor" width="24" height="24"></unicon>
 						</div>
 						<heading size="large" class="mb-4">Get Sponsored</heading>
-						
 					</div>
 				</div>
 			</div>
