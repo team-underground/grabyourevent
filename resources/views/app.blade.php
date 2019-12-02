@@ -37,6 +37,7 @@
 
         gtag('config', 'UA-151880965-2');
     </script>
+    <script data-ad-client="ca-pub-5267383771293379" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     @endif
     @routes
 </head>
