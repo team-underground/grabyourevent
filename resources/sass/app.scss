@@ -328,5 +328,109 @@ input::placeholder {
 
 .ql-editor {
     line-height: 1.5;
-    padding: 0;
+    padding: 0 !important;
+}
+
+.ql-editor ol,
+.ql-editor ul {
+    padding-left: 0 !important;
+}
+.ql-editor ol > li,
+.ql-editor ul > li {
+    list-style-type: none;
+    margin-bottom: 0.5rem !important;
+}
+
+.ql-editor .ql-indent-1:not(.ql-direction-rtl),
+.ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
+    padding-left: 4rem !important;
+}
+
+.ql-editor .ql-indent-2:not(.ql-direction-rtl),
+.ql-editor li.ql-indent-2:not(.ql-direction-rtl) {
+    padding-left: 6.5rem !important;
+}
+
+// Trend Charts
+.random {
+    width: 100%;
+    .vtc {
+        height: 250px;
+        font-size: 12px;
+        @media (min-width: 699px) {
+            height: 320px;
+        }
+    }
+    .labels {
+        stroke: rgba(0, 0, 0, 0.05);
+    }
+    .active-line {
+        stroke: rgba(0, 0, 0, 0.2);
+    }
+    .point {
+        stroke-width: 2;
+        transition: stroke-width 0.2s;
+    }
+    .point.is-active {
+        stroke-width: 5;
+    }
+    .curve1 {
+        .stroke {
+            stroke: #fbac91;
+            stroke-width: 2;
+        }
+        .fill {
+            fill: #fbac91;
+            opacity: 0.05;
+        }
+        .point {
+            fill: #fbac91;
+            stroke: #fbac91;
+        }
+    }
+    .curve2 {
+        .stroke {
+            stroke: #fbe1b6;
+            stroke-width: 2;
+        }
+        .point {
+            fill: #fbe1b6;
+            stroke: #fbe1b6;
+        }
+    }
+
+    .tooltip {
+        &:not(.is-active) {
+            display: none;
+        }
+        border-radius: 10px;
+        padding: 10px;
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+        &-data {
+            display: flex-col;
+            &-item {
+                display: flex;
+                align-items: center;
+                &:not(:first-child) {
+                    // margin-left: 20px;
+                }
+                &:before {
+                    content: "";
+                    display: block;
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 5px;
+                    border-radius: 10px;
+                }
+                &--1:before {
+                    background: #fbac91;
+                }
+                &--2:before {
+                    background: #fbe1b6;
+                }
+            }
+        }
+    }
 }

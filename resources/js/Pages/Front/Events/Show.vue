@@ -89,7 +89,7 @@
 						<div class="md:w-2/3 px-4">
 							<div class="md:pr-10">
 								<heading class="mb-2" size="large">About the event</heading>
-								<heading class="mb-10" v-html="event.event_description"></heading>
+								<heading class="job-description ql-editor" v-html="event.event_description"></heading>
 
 								<div class="mb-10">
 									<heading class="mb-2" size="large">Additional Information</heading>
