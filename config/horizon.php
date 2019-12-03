@@ -143,7 +143,7 @@ return [
         'production' => [
             'supervisor-production-eventeefy' => [
                 'connection' => 'redis',
-                'queue' => ['eventeefy-queue'],
+                'queue' => [env('REDIS_QUEUE', 'eventeefy-queue')],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 1,
@@ -153,7 +153,7 @@ return [
         'staging' => [
             'supervisor-staging-eventeefy' => [
                 'connection' => 'redis',
-                'queue' => ['staging-eventeefy-queue'],
+                'queue' => [env('REDIS_QUEUE', 'staging-eventeefy-queue')],
                 'balance' => 'simple',
                 'processes' => 5,
                 'tries' => 3,
