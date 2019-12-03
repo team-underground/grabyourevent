@@ -88,7 +88,7 @@
                                     <tbody>
                                         <tr>
                                             <td width="50%" align="left">
-                                                <a href="https://grabyourevent.com" target="_blank"><img src="https://grabyourevent.com/gye.png" alt="" width="150"></a>
+                                                <a href="https://grabyourevent.com" target="_blank"><img src="https://grabyourevent.com/gye.png" alt="" width="50"></a>
                                             </td>
                                             <td width="50%" class="esd-block-text es-p15t es-p10b" align="right">
                                                 <p style="margin: 0; color: #4a5568; font-weight: 400; letter-spacing: .025em; font-size: 0.75rem; line-height: 1.325rem;">&copy; grabyourevent.com</p>

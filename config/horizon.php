@@ -141,9 +141,9 @@ return [
 
     'environments' => [
         'production' => [
-            'supervisor-1' => [
+            'supervisor-production-eventeefy' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['eventeefy-queue'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 1,
@@ -151,9 +151,9 @@ return [
         ],
 
         'staging' => [
-            'supervisor-1' => [
+            'supervisor-staging-eventeefy' => [
                 'connection' => 'redis',
-                'queue' => ['staging-default'],
+                'queue' => ['staging-eventeefy-queue'],
                 'balance' => 'simple',
                 'processes' => 5,
                 'tries' => 3,
