@@ -299,3 +299,34 @@ input::placeholder {
     );
     z-index: 1;
 }
+
+// Quill Editor Customization
+.bg-facebook {
+    background-color: #3b5998 !important;
+}
+.bg-twitter {
+    background-color: #38a1f3 !important;
+}
+.bg-linkedin {
+    background-color: #0e76a8 !important;
+}
+.bg-whatsapp {
+    background-color: #4fce5d !important;
+}
+.job-description a {
+    text-decoration: none;
+    display: inline-block;
+    color: #29a9c9;
+    border-bottom: 2px solid #cae9f1;
+}
+.job-description a:hover,
+.job-description a:focus {
+    text-decoration: none;
+    border-color: #87cfe0;
+    color: #2598b5;
+}
+
+.ql-editor {
+    line-height: 1.5;
+    padding: 0;
+}

@@ -17,7 +17,6 @@ class WelcomeController extends Controller
     public function __invoke()
     {
         SEOMeta::setTitle('Home');
-        SEOMeta::setCanonical(url('/'));
 
         OpenGraph::setTitle('Home');
         OpenGraph::setUrl(url('/'));
