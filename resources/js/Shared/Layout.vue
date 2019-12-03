@@ -305,8 +305,8 @@
 
 					<div class="w-1/2 md:w-1/3 px-4 mb-6">
 						<heading class="mb-3" size="small-caps">Get Connected</heading>
-						<a href="#" class="block text-sm mb-2 hover:text-gray-500">Facebook</a>
-						<a href="#" class="block text-sm mb-2 hover:text-gray-500">Twitter</a>
+						<a href="https://www.facebook.com/grabyourevent" class="block text-sm mb-2 hover:text-gray-500">Facebook</a>
+						<a href="https://twitter.com/grabyourevent" class="block text-sm mb-2 hover:text-gray-500">Twitter</a>
 						<a href="#" class="block text-sm mb-2 hover:text-gray-500">Instagram</a>
 					</div>
 				</div>
