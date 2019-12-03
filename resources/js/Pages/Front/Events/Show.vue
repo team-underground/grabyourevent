@@ -91,7 +91,7 @@
 								<heading class="mb-2" size="large">About the event</heading>
 								<heading class="job-description ql-editor" v-html="event.event_description"></heading>
 
-								<div class="mb-10">
+								<div class="mt-6 mb-10">
 									<heading class="mb-2" size="large">Additional Information</heading>
 									<heading class="job-description ql-editor" v-html="event.optional_description"></heading>
 
@@ -112,8 +112,9 @@
 
 								<social-sharing
 									:url="route('events.show', event.event_slug)"
-									:title="event.event_name"
-									:description="event.event_description"
+									:title="event.seo_title"
+									:description="event.meta_description"
+									:hashtags="event.meta_keywords.join(',')"
 									inline-template
 								>
 									<div class="flex">

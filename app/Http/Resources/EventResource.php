@@ -40,6 +40,9 @@ class EventResource extends JsonResource
                 'edit' => route('admin.events.edit', $this),
                 'show' => route('events.show', $this->event_slug)
             ],
+            'seo_title' => $this->seo_title,
+            'meta_description' => $this->meta_description,
+            'meta_keywords' => $this->meta_keywords
         ];
     }
 }
