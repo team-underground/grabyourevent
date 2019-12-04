@@ -47,7 +47,7 @@ class EventsController extends Controller
             $query = Event::published()->closed(false);
 
             return Inertia::render('Front/Events/Index', [
-                'events' => $query->orderBy('event_starting_date')->paginate()
+                'events' => $query->orderBy('event_starting_date')->paginate(16)
                     ->transform(function ($event) {
                         return new EventResource($event);
                     }),
@@ -57,7 +57,7 @@ class EventsController extends Controller
             $query = Event::whereRaw('MONTH(event_starting_date) = ?', [date('m')])->published()->closed(false);
 
             return Inertia::render('Front/Events/ThisMonth', [
-                'events' => $query->orderBy('event_starting_date')->paginate()
+                'events' => $query->orderBy('event_starting_date')->paginate(16)
                     ->transform(function ($event) {
                         return new EventResource($event);
                     }),
