@@ -23,6 +23,7 @@ final class CategoryType extends Enum
     const Arts = 9;
     const FoodAndDrinks = 10;
     const HealthAndFitness = 11;
+    const Entertainment = 12;
 
     public static function getDescription($value): string
     {
