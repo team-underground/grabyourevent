@@ -67,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
                 {
                     return [
                         'data' => $this->items->toArray(),
+                        'count' => $this->total(),
                         'links' => $this->links()
                     ];
                 }
