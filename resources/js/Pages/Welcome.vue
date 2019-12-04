@@ -474,6 +474,14 @@ export default {
         return {};
     },
 
+    methods: {
+        onScroll({ target: { scrollTop, clientHeight, scrollHeight } }) {
+            if (scrollTop + clientHeight >= scrollHeight) {
+                this.loadMorePosts();
+            }
+        }
+    },
+
     directives: {
         dragscroll: dragscroll
     }
