@@ -348,8 +348,19 @@
             </div>
         </div>
 
-        <div class="relative bg-orange-100 py-16">
-            <div class="mx-4 md:max-w-6xl md:mx-auto">
+        <div class="relative bg-orange-100 py-16 overflow-hidden">
+            <div
+                class="-mt-12 absolute left-0 top-0 w-32 h-32 block"
+                style="transform: rotate(45deg); background-image: linear-gradient(45deg, #fdebc8 25%, #fffaf0 25%, #fffaf0 50%, #fdebc8 50%, #fdebc8 75%, #fffaf0 75%, #fffaf0 100%);
+background-size: 14.14px 14.14px;"
+            ></div>
+
+            <div
+                style="transform: rotate(45deg);"
+                class="-mt-16 ml-2 absolute left-0 top-0 w-40 h-32 block border-4 border-orange-300"
+            ></div>
+
+            <div class="mx-4 md:max-w-6xl md:mx-auto mt-16 md:mt-8">
                 <div class="-mx-4 flex">
                     <div class="1/5 px-4 text-center">
                         <div
@@ -391,6 +402,17 @@
             </div>
 
             <div
+                class="-mb-8 absolute right-0 bottom-0 w-24 h-24 block"
+                style="transform: rotate(45deg); background-image: linear-gradient(45deg, #fdebc8 25%, #fffaf0 25%, #fffaf0 50%, #fdebc8 50%, #fdebc8 75%, #fffaf0 75%, #fffaf0 100%);
+background-size: 14.14px 14.14px;"
+            ></div>
+
+            <div
+                style="transform: rotate(45deg);"
+                class="-mr-8 -mb-8 absolute right-0 bottom-0 w-24 h-24 block border-4 border-orange-300"
+            ></div>
+
+            <!-- <div
                 class="-mb-1 absolute right-0 bottom-0 w-10 h-10 rounded-full bg-orange-300 block"
             ></div>
             <div
@@ -398,7 +420,7 @@
             ></div>
             <div
                 class="-mb-2 absolute right-0 mr-32 bottom-0 w-5 h-5 rounded-full bg-orange-300 block"
-            ></div>
+            ></div> -->
         </div>
 
         <subscription-form :errors="errors"></subscription-form>
