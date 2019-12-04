@@ -13,7 +13,10 @@
                 <div
                     class="shadow-md rounded-lg my-10 bg-white overflow-hidden md:px-4"
                 >
-                    <subscription-form class="rounded-lg"></subscription-form>
+                    <subscription-form
+                        class="rounded-lg"
+                        :errors="errors"
+                    ></subscription-form>
                 </div>
             </div>
         </div>
@@ -30,6 +33,7 @@ export default {
         Layout,
         Alert,
         SubscriptionForm
-    }
+    },
+    props: ["errors"]
 };
 </script>
