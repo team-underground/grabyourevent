@@ -89,8 +89,8 @@ class EventsController extends Controller
         OpenGraph::addProperty('locale', 'en-us');
 
         OpenGraph::addImage($event->event_image_path);
-        OpenGraph::addImage(['url' => $event->event_image_path, 'size' => 300]);
-        OpenGraph::addImage($event->event_image_path, ['height' => 300, 'width' => 300]);
+        OpenGraph::addImage($event->event_image_path, ['height' => 300, 'width' => 200]);
+        // OpenGraph::addImage(['url' => $event->event_image_path, 'size' => 300]);
 
         JsonLd::setTitle($event->seo_title);
         JsonLd::setDescription($event->meta_description);
