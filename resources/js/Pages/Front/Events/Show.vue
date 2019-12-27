@@ -115,6 +115,7 @@
 									:title="event.seo_title"
 									:description="event.meta_description"
 									:hashtags="event.meta_keywords.join(',')"
+									:quote="event.seo_title"
 									inline-template
 								>
 									<div class="flex">

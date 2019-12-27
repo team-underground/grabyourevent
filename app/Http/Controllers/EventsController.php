@@ -7,13 +7,16 @@ use App\Category;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Enums\EventStatusType;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\EventResource;
-use App\Http\Requests\CreateEventRequest;
-use Illuminate\Contracts\Support\Arrayable;
 
+use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\JsonLd;
+use App\Http\Requests\CreateEventRequest;
+use Carbon\Carbon;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * @group Events
@@ -73,6 +76,15 @@ class EventsController extends Controller
     public function show($eventSlug)
     {
         $event = Event::with('organiser')->where('event_slug', $eventSlug)->firstOrFail();
+        // dd($event->isClosed());
+        //TODO: scope the if statement into a gate named show-event
+        if (
+            $event->event_status === EventStatusType::getInstance(EventStatusType::Published)->key
+            && $event->event_published_at != null
+            && $event->isClosed()
+        ) {
+            abort(404);
+        }
         // record page views
         views($event)->record();
 

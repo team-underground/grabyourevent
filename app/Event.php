@@ -215,6 +215,11 @@ class Event extends BaseModel implements ViewableContract
         }
     }
 
+    public function isClosed()
+    {
+        return $this->event_ending_date < Carbon::now();
+    }
+
     public function attachTags($tags)
     {
         // detach all tags if we have earlier
