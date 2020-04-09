@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Assert;
 use Illuminate\Foundation\Testing\TestResponse;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
