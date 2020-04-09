@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1 # Download the source code
-      - name: Yarn Build
+      - name: NPM Build
         run: |
-          yarn install
-          yarn prod
+          npm install
+          npm run prod
           cat public/mix-manifest.json # See asset versions in log
       - name: Upload build files
         uses: actions/upload-artifact@v1
