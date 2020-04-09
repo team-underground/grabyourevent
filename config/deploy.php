@@ -111,11 +111,11 @@ return [
     */
 
     'hosts' => [
-        'staging.grabyourevent.com' => [
-            'stage' => 'staging',
-            'deploy_path' => '/var/www/staging.grabyourevent.com',
-            'user' => 'root'
-        ],
+        // 'staging.grabyourevent.com' => [
+        //     'stage' => 'staging',
+        //     'deploy_path' => '/var/www/staging.grabyourevent.com',
+        //     'user' => 'root'
+        // ],
         'grabyourevent.com' => [
             'stage' => 'production',
             'deploy_path' => '/var/www/grabyourevent.com',
