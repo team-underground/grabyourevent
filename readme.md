@@ -31,3 +31,4 @@ php artisan db:seed
 -   [x] event publishing from admin
 -   [ ] ticket sell
 -   [ ] integrate razor pay
+-   [ ] ci/cd (ongoing)
