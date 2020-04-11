@@ -5,8 +5,8 @@ Online Concert Ticket Selling application
 ## Installation
 
 ```
-git clone git@github.com:abhisheksarmah/eventeefy
-cd eventeefy
+git clone git@github.com:abhisheksarmah/grabyourevent
+cd grabyourevent
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -31,4 +31,4 @@ php artisan db:seed
 -   [x] event publishing from admin
 -   [ ] ticket sell
 -   [ ] integrate razor pay
--   [ ] ci/cd (ongoing)
+-   [ ] ci/cd

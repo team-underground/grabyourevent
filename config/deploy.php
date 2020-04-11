@@ -95,7 +95,7 @@ return [
 
     'options' => [
         'application' => env('APP_NAME', 'Laravel'),
-        'repository' => 'git@github.com:abhisheksarmah/eventeefy.git',
+        'repository' => 'git@github.com:abhisheksarmah/grabyourevent.git',
         'php_fpm_service' => 'php7.2-fpm',
     ],
 
