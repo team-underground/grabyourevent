@@ -32,3 +32,7 @@ php artisan db:seed
 -   [ ] ticket sell
 -   [ ] integrate razor pay
 -   [ ] ci/cd
+
+## We are helpful?
+
+Just fork our application. Give it try. Let us know, what you have build :thumbs:
